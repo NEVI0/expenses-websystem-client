@@ -1,1 +1,83 @@
-<p>all-expenses works!</p>
+<!-- Title -->
+<h2 class="title">
+	Todas as suas Despesas
+	<small>Por: Mês ou Ano</small>
+</h2>
+<!-- FIM -->
+
+<!-- Div que verifica se há despesas na variavel -->
+<div *ngIf="expenses$ | async as expenses; else loading">
+
+	<!-- Verifica se existe alguma Despesa, senão carrega o ng-template -->
+	<div *ngIf="expenses.length == 0; else allExpenses" align="center">
+		<p>Não há nenhuma Despesa</p>
+		<button mat-raised-button color="primary" (click)="onRefresh()">Tentar Denovo</button>
+	</div>
+	<!-- FIM -->
+
+	<!-- Tabela com as Despesas -->
+	<ng-template #allExpenses>
+
+		<!-- Painel que Expande contendo a lista -->
+		<mat-accordion>
+			<mat-expansion-panel>
+				<mat-expansion-panel-header>
+					<mat-panel-title>
+						Tabela com todas as suas despesas
+					</mat-panel-title>
+				</mat-expansion-panel-header>
+
+				<mat-table [dataSource]="expenses$" class="table">
+
+					<ng-container matColumnDef="name">
+						<mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+						<mat-cell *matCellDef="let data"> {{ data.name }} </mat-cell>
+					</ng-container>
+
+					<ng-container matColumnDef="value">
+						<mat-header-cell *matHeaderCellDef>Valor</mat-header-cell>
+						<mat-cell *matCellDef="let data"> {{ data.value | currency }} </mat-cell>
+					</ng-container>
+
+					<ng-container matColumnDef="createdAt">
+						<mat-header-cell *matHeaderCellDef>Data de Criação</mat-header-cell>
+						<mat-cell *matCellDef="let data"> {{ data.createdAt | date }} </mat-cell>
+					</ng-container>
+
+					<ng-container matColumnDef="actions">
+						<mat-header-cell *matHeaderCellDef>Ações</mat-header-cell>
+						<mat-cell *matCellDef="let data">
+							<button mat-raised-button color="primary" (click)="onShowAlert(data._id)">
+								<mat-icon>delete</mat-icon>
+							</button>
+						</mat-cell>
+					</ng-container>
+
+					<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+					<mat-row *matRowDef=" let row; columns: displayedColumns"></mat-row>
+
+				</mat-table>
+
+
+
+			</mat-expansion-panel>
+		</mat-accordion>
+		<!-- FIM -->
+
+	</ng-template>
+	<!-- FIM -->
+
+</div>
+<!-- FIM -->
+
+<!-- Spinner -->
+<ng-template #loading>
+	<mat-grid-list cols="3" rowHeight="50">
+		<mat-grid-tile colspan="1"></mat-grid-tile>
+		<mat-grid-tile colspan="1" align="center">
+			<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+		</mat-grid-tile>
+		<mat-grid-tile colspan="1"></mat-grid-tile>
+	</mat-grid-list>
+</ng-template>
+<!-- FIM -->
