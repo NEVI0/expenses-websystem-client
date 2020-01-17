@@ -1,0 +1,28 @@
+.content {
+	margin: 30px 20px;
+}
+
+.content .subtitle {
+	color: #00ACC1;
+	font-weight: bold;
+	cursor: default;
+}
+
+.content .description {
+	text-align: justify;
+}
+
+.content .flex {
+	display: flex;
+}
+
+.content .flex .left {
+	text-align: left;
+	padding-top: 9px;
+	width: 50%;
+}
+
+.content .flex .right {
+	text-align: right;
+	width: 50%;
+}

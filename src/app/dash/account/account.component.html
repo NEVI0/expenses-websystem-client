@@ -1,0 +1,185 @@
+<!-- Title -->
+<h2 class="title">
+	Administrar sua Conta
+	<small>{{ isLoading ? 'Carregando...' : 'Conta Protegida' }}</small>
+</h2>
+<!-- FIM -->
+
+<!-- Conteudo -->
+<div *ngIf="dataCtrl$ | async as dataCtrl; else loading">
+
+	<!-- Avatar -->
+	<div class="avatar">
+		<div class="image">
+			<img src="https://material.angular.io/assets/img/examples/shiba1.jpg">
+		</div>
+		<div class="userData">
+			<h3>
+				{{ dataCtrl.userName }}
+				<small>{{ dataCtrl.userEmail }}</small>
+			</h3>
+		</div>
+	</div>
+	<!-- FIM -->
+
+	<!-- Algum Conteudo -->
+	<mat-accordion >
+		<mat-expansion-panel>
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+				 	Controle de Dados
+				</mat-panel-title>
+			</mat-expansion-panel-header>
+
+			<mat-list>
+				<mat-list-item>
+					<mat-icon mat-list-icon color="primary">attach_money</mat-icon>
+					<h3 mat-line class="listTitle">Salário</h3>
+					<div align="end">
+						<p>{{ dataCtrl.userSalary | currency }}</p>
+					</div>
+				</mat-list-item>
+				<mat-list-item>
+					<mat-icon mat-list-icon color="primary">assessment</mat-icon>
+					<h3 mat-line class="listTitle">Total de Despesas</h3>
+					<div align="end">
+						<p>{{ dataCtrl.numberOfExpenses }}</p>
+					</div>
+				</mat-list-item>
+				<mat-list-item>
+					<mat-icon mat-list-icon color="primary">trending_up</mat-icon>
+					<h3 mat-line class="listTitle">Total de gastos com Despesas</h3>
+					<div align="end">
+						<p>{{ dataCtrl.sumOfValues | currency }}</p>
+					</div>
+				</mat-list-item>
+				<mat-list-item>
+					<mat-icon mat-list-icon color="primary">timeline</mat-icon>
+					<h3 mat-line class="listTitle">Média de gastos por Mês</h3>
+					<div align="end">
+						<p>{{ dataCtrl.avgOfValues | currency }}</p>
+					</div>
+				</mat-list-item>
+
+				<h3 mat-subheader>Dados Pessoais</h3>
+
+				<mat-list-item>
+					<mat-icon mat-list-icon color="primary">person</mat-icon>
+					<h3 mat-line class="listTitle">Nome de Usuário</h3>
+					<div align="end">
+						<p>{{ dataCtrl.userName }}</p>
+					</div>
+				</mat-list-item>
+				<mat-list-item>
+					<mat-icon mat-list-icon color="primary">email</mat-icon>
+					<h3 mat-line class="listTitle">Email</h3>
+					<div align="end">
+						<p>{{ dataCtrl.userEmail }}</p>
+					</div>
+				</mat-list-item>
+
+			</mat-list>
+
+		</mat-expansion-panel>
+	</mat-accordion>
+	<!-- FIM -->
+
+</div>
+<!-- FIM -->
+
+<!-- Spinner -->
+<ng-template #loading>
+	<mat-grid-list cols="3" rowHeight="50">
+		<mat-grid-tile colspan="1"></mat-grid-tile>
+		<mat-grid-tile colspan="1" align="center">
+			<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+		</mat-grid-tile>
+		<mat-grid-tile colspan="1"></mat-grid-tile>
+	</mat-grid-list>
+</ng-template>
+<!-- FIM -->
+
+<!-- Title -->
+<h2 class="title">
+	Configurações
+	<small>Atualização de Dados e Senha</small>
+</h2>
+<!-- FIM -->
+
+<!-- Configurações de Conta -->
+<div class="content">
+
+	<h3 class="subtitle">Atualizar Dados da Conta</h3>
+	<p class="description">É possivel que você não queira mais que os seus dados pessoais sejam os atuais ou que você tenha perdido o seu email e tenha que trocar aqui, na opção abaixo é possivel atualizar os seus dados.</p>
+	<mat-card>
+		<mat-card-content class="flex">
+			<div class="left">
+				<b>Click no botão para atualizar seus Dados: </b>
+			</div>
+			<div class="right">
+				<button mat-raised-button color="accent">
+					Atualizar
+				</button>
+			</div>
+		</mat-card-content>
+	</mat-card>
+
+</div>
+
+<div class="content">
+
+	<h3 class="subtitle">Redefinir Senha</h3>
+	<p class="description">Por motivos de segurança, deixamos a atualização de dados e a redefinição de senha separados, para que haja um melhor controle e segurança da sua conta.</p>
+	<mat-card>
+		<mat-card-content class="flex">
+			<div class="left">
+				<b>Click no botão para redefinir a sua Senha: </b>
+			</div>
+			<div class="right">
+				<button mat-raised-button color="accent">
+					Redefinir Senha
+				</button>
+			</div>
+		</mat-card-content>
+	</mat-card>
+
+</div>
+
+<div class="content">
+
+	<h3 class="subtitle">Recuperar Minha Senha</h3>
+	<p class="description">Utilize essa opção para recuperar a sua senha caso você tenha a esquecido.</p>
+	<mat-card>
+		<mat-card-content class="flex">
+			<div class="left">
+				<b>Click no botão para te enviarmos a sua senha: </b>
+			</div>
+			<div class="right">
+				<button mat-raised-button color="accent">
+					Enviar Email
+				</button>
+			</div>
+		</mat-card-content>
+	</mat-card>
+
+</div>
+
+<div class="content">
+
+	<h3 class="subtitle">Deletar Conta</h3>
+	<p class="description">Utilize essa opção se você não quiser mais possuir uma conta no nosso sistema. Lembre-se que quando sua conta for excluida, você não poderá mais recupera-lá.</p>
+	<mat-card>
+		<mat-card-content class="flex">
+			<div class="left">
+				<b>Click no botão para excluir sua Conta: </b>
+			</div>
+			<div class="right">
+				<button mat-raised-button color="accent">
+					Excluir Conta
+				</button>
+			</div>
+		</mat-card-content>
+	</mat-card>
+
+</div>
+<!-- FIM -->

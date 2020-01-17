@@ -1,0 +1,42 @@
+<mat-sidenav #sidenav [(opened)]="isOpened">
+	<app-menu></app-menu>
+</mat-sidenav>
+
+<mat-sidenav-content>
+	<mat-toolbar color="primary">
+		<mat-toolbar-row>
+			<button mat-raised-button (click)="isOpened=!isOpened">
+				Menu
+			</button>
+			<button mat-button routerLink="/dash/">Home</button>
+			<button mat-button routerLink="/dash/all-expenses">Todas as Despesas</button>
+
+			<span class="spacer"></span>
+
+			<button mat-icon-button routerLink="/dash/settings">
+				<mat-icon>settings</mat-icon>
+			</button>
+
+			<button mat-icon-button [matMenuTriggerFor]="menu">
+				<div class="avatar">
+					<img src="https://material.angular.io/assets/img/examples/shiba1.jpg">
+				</div>
+			</button>
+		</mat-toolbar-row>
+	</mat-toolbar>
+
+	<div class="container" (click)="sidenav.close()">
+		<router-outlet></router-outlet>
+	</div>
+</mat-sidenav-content>
+
+<mat-menu #menu="matMenu">
+	<button mat-menu-item routerLink="/dash/account">
+		<mat-icon>account_circle</mat-icon>
+		<span>Minha Conta</span>
+	</button>
+	<button mat-menu-item>
+		<mat-icon>logout</mat-icon>
+		<span>Sair</span>
+	</button>
+</mat-menu>

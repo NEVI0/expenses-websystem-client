@@ -1,0 +1,45 @@
+<div class="header">
+    <button mat-raised-button (click)="onClose()">
+		Fechar Menu
+	</button>
+</div>
+
+<div class="content">
+	<mat-list>
+		<h3 mat-subheader>Navegacão Principal</h3>
+
+		<mat-list-item>
+		  <mat-icon mat-list-icon>home</mat-icon>
+		  <a mat-line class="link" routerLink="/dash" (click)="onClose()">Home Page</a>
+		</mat-list-item>
+
+		<mat-list-item>
+			<mat-icon mat-list-icon>list</mat-icon>
+			<a mat-line class="link" routerLink="/dash/all-expenses" (click)="onClose()">Todas as Despesas</a>
+		</mat-list-item>
+
+		<mat-list-item>
+			<mat-icon mat-list-icon>account_circle</mat-icon>
+			<a mat-line class="link" routerLink="/dash/account" (click)="onClose()">Minha Conta</a>
+		</mat-list-item>
+
+		<mat-divider></mat-divider>
+
+		<h3 mat-subheader>Opções</h3>
+
+		<mat-list-item>
+			<mat-icon mat-list-icon>settings</mat-icon>
+			<a mat-line class="link" routerLink="/dash/settings" (click)="onClose()">Configurações do Sistema</a>
+		</mat-list-item>
+
+		<mat-list-item>
+			<mat-icon mat-list-icon>logout</mat-icon>
+			<a mat-line class="link">Sair</a>
+		</mat-list-item>
+	</mat-list>
+</div>
+
+
+<div class="footer" align="center">
+	<img src="assets/images/sistema-logo.png">
+</div>
