@@ -1,3 +1,4 @@
+/* Angular */
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
@@ -9,20 +10,23 @@ import { AllExpensesComponent } from './dash/all-expenses/all-expenses.component
 import { AccountComponent } from './dash/account/account.component';
 import { SettingsComponent } from './dash/settings/settings.component';
 
+/* Guard */
+import { AuthGuard } from './guards/auth.guard';
+
 const AppRoutes: Routes = [
     {
-        path: 'dash', component: DashComponent, children: [
-            { path: '', component: HomePageComponent },
-            { path: 'all-expenses', component: AllExpensesComponent },
-            { path: 'account', component: AccountComponent },
-            { path: 'settings', component: SettingsComponent }
+        path: 'dash', canActivate: [AuthGuard], component: DashComponent, children: [
+            { path: '', component: HomePageComponent, canActivate: [AuthGuard] },
+            { path: 'all-expenses', component: AllExpensesComponent, canActivate: [AuthGuard] },
+            { path: 'account', component: AccountComponent, canActivate: [AuthGuard] },
+            { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] }
         ]
     },
     {
         path: 'auth', component: AuthComponent
     },
     {
-        path: '', redirectTo: 'dash', pathMatch: 'full'
+        path: '', redirectTo: 'auth', pathMatch: 'full'
     }
 ];
 

@@ -22,12 +22,12 @@ export class SettingsComponent implements OnInit {
 
 	onChangeTheme() {
 		if (document.body.classList.contains("lightMode")) {
-			localStorage.setItem("_aplication_theme", "darkMode");
+			localStorage.setItem("_application_theme", "darkMode");
 			this.darkMode = true;
 			document.body.classList.remove("lightMode");
 			document.body.classList.add("darkMode");
 		} else {
-			localStorage.setItem("_aplication_theme", "lightMode");
+			localStorage.setItem("_application_theme", "lightMode");
 			this.darkMode = false;
 			document.body.classList.remove("darkMode");
 			document.body.classList.add("lightMode");

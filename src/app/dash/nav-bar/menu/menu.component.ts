@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSidenav } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -8,12 +9,20 @@ import { MatSidenav } from '@angular/material';
 })
 export class MenuComponent implements OnInit {
 
-    constructor(private sidenav: MatSidenav) { }
+    constructor(
+        private sidenav: MatSidenav,
+        private router: Router
+    ) {}
 
 	ngOnInit() {}
 
 	onClose() {
 		this.sidenav.close();
-	}
+    }
+
+    onLogout() {
+        localStorage.removeItem("_application_user_data");
+        this.router.navigate(['/auth']);
+    }
 
 }

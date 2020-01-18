@@ -1,7 +1,9 @@
+/* Angular */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 /* Angular Material */
 import {
@@ -10,7 +12,8 @@ import {
 	MatFormFieldModule, MatGridListModule, MatSidenavModule,
 	MatDialogModule, MatDatepickerModule, MatNativeDateModule,
 	MatListModule, MatSnackBarModule, MatProgressBarModule,
-	MatExpansionModule, MatMenuModule, MatPaginatorModule
+    MatExpansionModule, MatMenuModule, MatPaginatorModule,
+    MatTabsModule, MatCheckboxModule, MatProgressSpinnerModule
 } from '@angular/material';
 
 /* Components / Modules */
@@ -32,7 +35,8 @@ const MaterialModules = [
 	MatFormFieldModule, MatGridListModule, MatSidenavModule,
 	MatDialogModule, MatDatepickerModule, MatNativeDateModule,
 	MatListModule, MatSnackBarModule, MatProgressBarModule,
-	MatExpansionModule, MatMenuModule, MatPaginatorModule
+    MatExpansionModule, MatMenuModule, MatPaginatorModule,
+    MatTabsModule, MatCheckboxModule, MatProgressSpinnerModule
 ]
 
 @NgModule({
@@ -41,7 +45,8 @@ const MaterialModules = [
         BrowserAnimationsModule,
         MaterialModules,
         HttpClientModule,
-        RoutesModule
+        RoutesModule,
+        ReactiveFormsModule
     ],
     declarations: [
         AppComponent,
