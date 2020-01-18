@@ -14,7 +14,6 @@ export class DashService {
 
     private readonly BlockedApiUrl = environment.BlockedApiUrl;
 	private readonly UserId = 'u1';
-    public Mode: boolean;
 
     constructor(private http: HttpClient) {}
 
