@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+
+import { AddExpenseComponent } from '../../shared/add-expense/add-expense.component';
 
 @Component({
     selector: 'app-floating-btn',
@@ -8,12 +11,17 @@ import { Component, OnInit } from '@angular/core';
 
 export class FloatingBtnComponent implements OnInit {
 
-    constructor() {}
+    constructor(private dialog: MatDialog) {}
 
 	ngOnInit() {}
 
 	openDialog() {
-		console.log("Open Reactive Form");
+		const dialogRef = this.dialog.open(AddExpenseComponent, {
+            width: "400px"
+        });
+        dialogRef.afterClosed().subscribe(resp => {
+			console.log(`Dialog Result: ${resp}`);
+		});
 	}
 
 }

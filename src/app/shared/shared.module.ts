@@ -14,7 +14,10 @@ import {
     MatGridListModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSnackBarModule
 } from '@angular/material';
 
 
@@ -28,7 +31,13 @@ import {
         MatGridListModule,
         MatFormFieldModule,
         MatInputModule,
-        MatDatepickerModule
+        MatDatepickerModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSnackBarModule
+    ],
+    entryComponents: [
+        AddExpenseComponent
     ],
     declarations: [
         AddExpenseComponent

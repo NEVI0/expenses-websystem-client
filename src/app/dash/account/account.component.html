@@ -5,25 +5,25 @@
 </h2>
 <!-- FIM -->
 
+<!-- Avatar -->
+<div class="avatar">
+	<div class="image">
+		<img src="https://material.angular.io/assets/img/examples/shiba1.jpg">
+	</div>
+	<div class="userData">
+		<h3>
+			{{ userData.name }}
+			<small>{{ userData.email }}</small>
+		</h3>
+	</div>
+</div>
+<!-- FIM -->
+
 <!-- Conteudo -->
 <div *ngIf="dataCtrl$ | async as dataCtrl; else loading">
 
-	<!-- Avatar -->
-	<div class="avatar">
-		<div class="image">
-			<img src="https://material.angular.io/assets/img/examples/shiba1.jpg">
-		</div>
-		<div class="userData">
-			<h3>
-				{{ dataCtrl.userName }}
-				<small>{{ dataCtrl.userEmail }}</small>
-			</h3>
-		</div>
-	</div>
-	<!-- FIM -->
-
 	<!-- Algum Conteudo -->
-	<mat-accordion >
+	<mat-accordion>
 		<mat-expansion-panel>
 			<mat-expansion-panel-header>
 				<mat-panel-title>
