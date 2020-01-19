@@ -41,4 +41,8 @@ export class AllExpensesComponent implements OnInit {
 		console.log("Mosta uma mensagem de alerta!");
 	}
 
+	onShowInfo(_id) {
+		console.log(_id);
+	}
+
 }

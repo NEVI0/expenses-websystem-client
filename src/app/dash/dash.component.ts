@@ -20,19 +20,20 @@ export class DashComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        // this.authService.validateToken().subscribe(
-        //     resp => {
-        //         if (resp.valid == false) {
-        //             localStorage.removeItem(this.AppUserData);
-        //             this.router.navigate(['/auth']);
-        //         } else {
-        //             console.log("Executando...");
-        //         }
-        //     },
-        //     err => {
-        //         console.log(err)
-        //     }
-        // );
+        this.authService.validateToken(this.authService.user.token).subscribe(
+            resp => {
+                if (resp.valid == false) {
+                    localStorage.removeItem(this.AppUserData);
+                    this.router.navigate(['/auth']);
+                } else {
+                    console.log("Executando...");
+                }
+            },
+            err => {
+                localStorage.removeItem(this.AppUserData);
+                this.router.navigate(['/auth']);
+            }
+        );
     }
 
 }

@@ -11,7 +11,6 @@ import { User } from '../interfaces/User';
 
 export class AuthService {
 
-    private readonly BlockedApiUrl = environment.BlockedApiUrl;
     private readonly OpenedApiUrl = environment.OpenApiUrl;
     private readonly AppUserData = environment.AppUserData;
 
@@ -41,8 +40,8 @@ export class AuthService {
         );
     }
 
-	validateToken() {
-		return this.http.post<any>(`${this.OpenedApiUrl}/validateToken/`, this._user.token).pipe(take(1));
+	validateToken(token: string) {
+		return this.http.post<any>(`${this.OpenedApiUrl}/validateToken/`, { token: token }).pipe(take(1));
 	}
 
 

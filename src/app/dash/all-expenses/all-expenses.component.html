@@ -1,8 +1,20 @@
 <!-- Title -->
 <h2 class="title">
 	Todas as suas Despesas
-	<small>Por: Mês ou Ano</small>
+	<small>Controle</small>
 </h2>
+<!-- FIM -->
+
+<!-- Caixa de Pesquisa -->
+<mat-card class="searchBox">
+	<mat-card-content>
+		<mat-form-field class="group" appearance="outline">
+			<mat-label>Pesquisar Despesa</mat-label>
+			<input matInput>
+			<mat-icon matSuffix>search</mat-icon>
+		</mat-form-field>
+	</mat-card-content>
+</mat-card>
 <!-- FIM -->
 
 <!-- Div que verifica se há despesas na variavel -->
@@ -27,7 +39,7 @@
 					</mat-panel-title>
 				</mat-expansion-panel-header>
 
-				<mat-table [dataSource]="expenses$" class="table">
+				<mat-table [dataSource]="expenses$" class="table"  class="mat-elevation-z8">
 
 					<ng-container matColumnDef="name">
 						<mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
