@@ -3,9 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  OpenApiUrl: "https://expenses-server-api.herokuapp.com/oapi",
-  BlockedApiUrl: "https://expenses-server-api.herokuapp.com/api"
+    production: false,
+    OpenApiUrl: "https://expenses-server-api.herokuapp.com/oapi",
+    BlockedApiUrl: "https://expenses-server-api.herokuapp.com/api",
+    AppUserData: "_application_user_data",
+    AppTheme: "_application_theme"
 };
 
 /*
