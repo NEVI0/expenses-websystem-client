@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { take, tap } from 'rxjs/operators'
 
 import { environment } from '../../environments/environment';
@@ -13,7 +13,9 @@ export class AuthService {
 
     private readonly BlockedApiUrl = environment.BlockedApiUrl;
     private readonly OpenedApiUrl = environment.OpenApiUrl;
-    private _user;
+    private readonly AppUserData = environment.AppUserData;
+
+    private _user = JSON.parse(localStorage.getItem(this.AppUserData));
 
     constructor(
         private http: HttpClient
@@ -24,7 +26,7 @@ export class AuthService {
     }
 
     isAuthenticate() {
-        return localStorage.getItem("_application_user_data");
+        return this._user;
     }
 
     login(json) {
@@ -38,6 +40,10 @@ export class AuthService {
             tap(resp => this._user = resp)
         );
     }
+
+	validateToken() {
+		return this.http.post<any>(`${this.OpenedApiUrl}/validateToken/`, this._user.token).pipe(take(1));
+	}
 
 
 }

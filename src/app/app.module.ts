@@ -18,7 +18,6 @@ import {
 
 /* Components / Modules */
 import { AppComponent } from './app.component';
-import { RoutesModule } from './app.routing.module';
 import { AuthComponent } from './auth/auth.component';
 import { DashComponent } from './dash/dash.component';
 import { AccountComponent } from './dash/account/account.component';
@@ -28,6 +27,9 @@ import { FloatingBtnComponent } from './dash/floating-btn/floating-btn.component
 import { NavBarComponent } from './dash/nav-bar/nav-bar.component';
 import { SettingsComponent } from './dash/settings/settings.component';
 import { MenuComponent } from './dash/nav-bar/menu/menu.component';
+
+import { RoutesModule } from './app.routing.module';
+import { SharedModule } from './shared/shared.module';
 
 const MaterialModules = [
     MatTableModule, MatIconModule, MatButtonModule,
@@ -46,7 +48,8 @@ const MaterialModules = [
         MaterialModules,
         HttpClientModule,
         RoutesModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SharedModule
     ],
     declarations: [
         AppComponent,

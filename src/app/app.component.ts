@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { environment } from '../environments/environment';
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -9,11 +11,14 @@ import { Router } from '@angular/router';
 
 export class AppComponent implements OnInit {
 
+    private readonly AppUserData = environment.AppUserData;
+    private readonly AppTheme = environment.AppTheme;
+
     constructor(private router: Router) {}
 
     ngOnInit() {
-        const theme = localStorage.getItem("_application_theme");
-        const json = JSON.parse(localStorage.getItem("_application_user_data"));
+        const theme = localStorage.getItem(this.AppTheme);
+        const json = JSON.parse(localStorage.getItem(this.AppUserData));
 
         if (theme == "lightMode") {
             document.body.classList.remove("darkMode");
