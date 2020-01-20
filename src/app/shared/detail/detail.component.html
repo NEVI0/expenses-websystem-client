@@ -1,0 +1,54 @@
+<!-- Conteudo -->
+<div *ngIf="expense$ | async as expense; else loading" class="content">
+
+	<h2 mat-dialog-title align="center">{{ expense.name }}</h2>
+
+    <mat-dialog-content>
+
+		<fieldset>
+			<legend>Descrição</legend>
+			<p>{{ expense.description }}</p>
+		</fieldset>
+
+		<mat-list>
+			<mat-list-item>
+				<mat-icon mat-list-icon color="primary">attach_money</mat-icon>
+				<h3 mat-line>Valor</h3>
+				<div align="end">
+					<p mat-line>{{ expense.value | currency }}</p>
+				</div>
+			</mat-list-item>
+			<mat-list-item>
+				<mat-icon mat-list-icon color="primary">today</mat-icon>
+				<h3 mat-line>Data</h3>
+				<div align="end">
+					<p mat-line>{{ expense.date | date }}</p>
+				</div>
+			</mat-list-item>
+			<mat-list-item>
+				<mat-icon mat-list-icon color="primary">bookmark</mat-icon>
+				<h3 mat-line>Status</h3>
+				<div align="end">
+					<p mat-line>PENDENTE</p>
+				</div>
+			</mat-list-item>
+		</mat-list>
+
+	</mat-dialog-content>
+
+	<mat-dialog-actions align="center">
+		<button mat-button color="accent">
+			Marcar como Paga
+		</button>
+	</mat-dialog-actions>
+
+</div>
+<!-- FIM -->
+
+<!-- Spinner -->
+<ng-template #loading>
+    <mat-dialog-content align="center">
+		Carregando...
+    </mat-dialog-content>
+</ng-template>
+<!-- FIM -->

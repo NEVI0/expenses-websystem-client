@@ -17,8 +17,11 @@ import {
     MatDatepickerModule,
     MatIconModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatListModule
 } from '@angular/material';
+import { DetailComponent } from './detail/detail.component';
 
 
 @NgModule({
@@ -34,13 +37,20 @@ import {
         MatDatepickerModule,
         MatIconModule,
         MatButtonModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatProgressSpinnerModule,
+        MatListModule
     ],
     entryComponents: [
-        AddExpenseComponent
+        AddExpenseComponent,
+        DetailComponent
     ],
     declarations: [
-        AddExpenseComponent
+        AddExpenseComponent,
+        DetailComponent
+    ],
+    exports: [
+        DetailComponent
     ]
 })
 

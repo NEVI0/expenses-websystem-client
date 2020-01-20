@@ -33,6 +33,12 @@ export class DashService {
 		);
 	}
 
+	getExpenseById(_id: string) {
+		return this.http.get<Expense>(`${this.BlockedApiUrl}/expense/${_id}`, {
+			headers: this.headers
+		}).pipe(take(1));
+	}
+
 	getLastTenExpenses() {
 		return this.http.get<Expense[]>(`${this.BlockedApiUrl}/lastExpenses/${this.UserId}`, {
 			headers: this.headers
