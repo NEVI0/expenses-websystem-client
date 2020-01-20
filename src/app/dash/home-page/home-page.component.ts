@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { Observable, Subject, empty } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
 import { Expense } from '../../interfaces/Expense';
 import { DataController } from '../../interfaces/DataController';
 import { DashService } from '../dash.service';
+import { DetailComponent } from '../../shared/detail/detail.component';
 
 @Component({
-  selector: 'app-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss']
+	selector: 'app-home-page',
+	templateUrl: './home-page.component.html',
+	styleUrls: ['./home-page.component.scss']
 })
+
 export class HomePageComponent implements OnInit {
 
     expenses$: Observable<Expense[]>;
@@ -22,7 +25,10 @@ export class HomePageComponent implements OnInit {
 	isDanger: boolean = false;
 	calc: number;
 
-  	constructor(private dashService: DashService) { }
+  	constructor(
+		private dashService: DashService,
+		private dialog: MatDialog
+	) {}
 
 	ngOnInit() {
 		this.onRefresh();
@@ -52,6 +58,14 @@ export class HomePageComponent implements OnInit {
 				return empty();
 			})
 		);
+	}
+
+	onShowDetail(_id: string) {
+		const dialogRef = this.dialog.open(DetailComponent, {
+			width: "400px",
+			data: { _id }
+		});
+		dialogRef.afterClosed().subscribe();
 	}
 
 }

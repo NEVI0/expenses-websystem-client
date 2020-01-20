@@ -7,7 +7,7 @@
 
 <div *ngIf="dataCtrl$ | async as dataCtrl; else primaryLoading">
 
-	<mat-accordion >
+	<mat-accordion class="mat-elevation-z8">
 		<mat-expansion-panel>
 			<mat-expansion-panel-header>
 				<mat-panel-title>
@@ -73,7 +73,7 @@
 	<ng-template #someExpenses>
 
 		<!-- Painel que Expande contendo a lista -->
-		<mat-accordion>
+		<mat-accordion class="mat-elevation-z8">
 			<mat-expansion-panel>
 				<mat-expansion-panel-header>
 					<mat-panel-title>
@@ -82,7 +82,7 @@
 				</mat-expansion-panel-header>
 
 				<mat-list class="list">
-					<mat-list-item *ngFor="let item of expenses">
+					<mat-list-item class="item" *ngFor="let item of expenses" (click)="onShowDetail(item._id)">
 						<mat-icon mat-list-icon color="primary">label_important</mat-icon>
 						<h3 mat-line class="listTitle">{{ item.name }}</h3>
 						<p mat-line>{{ item.date | date }}</p>
