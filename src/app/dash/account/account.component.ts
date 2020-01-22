@@ -7,8 +7,8 @@ import { DataController } from '../../interfaces/DataController';
 import { DashService } from '../dash.service';
 import { User } from '../../interfaces/User';
 import { AuthService } from '../../auth/auth.service';
-import { environment } from '../../../environments/environment';
-import { ModalComponent } from 'src/app/shared/modal/modal.component';
+import { ModalComponent } from '../../shared/modal/modal.component';
+import { UpdateAccountComponent } from '../../shared/update-account/update-account.component';
 
 @Component({
     selector: 'app-account',
@@ -18,12 +18,10 @@ import { ModalComponent } from 'src/app/shared/modal/modal.component';
 
 export class AccountComponent implements OnInit {
 
-	private readonly AppUserData = environment.AppUserData;
-
     dataCtrl$: Observable<DataController>;
 	error$ = new Subject<boolean>();
 
-	userData: User = this.authService.user;
+	userData: User;
 	isLoading: boolean = false;
 
 	constructor(
@@ -38,6 +36,7 @@ export class AccountComponent implements OnInit {
 
 	onRefresh() {
 		this.isLoading = true;
+		this.userData = this.authService.user;
 		this.dataCtrl$ = this.dashService.getUserController().pipe(
 			tap(resp => {
 				this.isLoading = false;
@@ -58,6 +57,15 @@ export class AccountComponent implements OnInit {
 				action: "Sim, quero deletar!",
 				_id: this.userData._id
 			}
+		});
+	}
+
+	onUpdateAccount() {
+		const dialogRef = this.dialog.open(UpdateAccountComponent, {
+			width: "400px"
+		});
+		dialogRef.afterClosed().subscribe(resp => {
+			this.onRefresh();
 		});
 	}
 
