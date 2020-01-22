@@ -1,0 +1,53 @@
+<h2 mat-dialog-title>Atualizar Dados da Conta</h2>
+
+<form [formGroup]="updateForm" (ngSubmit)="onUpdate()">
+<mat-dialog-content>
+
+    <mat-grid-list cols="2" rowHeight="87">
+
+		<mat-grid-tile colspan="2">
+			<mat-form-field appearance="outline" class="group" hideRequiredMarker>
+				<mat-label>Seu Nome</mat-label>
+				<input type="text" formControlName="name" matInput>
+				<mat-icon matSuffix>edit</mat-icon>
+
+				<mat-error *ngIf="updateForm.get('name').hasError('required')">
+					O nome é <strong>obrigatório</strong>
+				</mat-error>
+			</mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2">
+			<mat-form-field appearance="outline" class="group" hideRequiredMarker>
+				<mat-label>Email</mat-label>
+				<input type="email" formControlName="email" matInput>
+				<mat-icon matSuffix>email</mat-icon>
+
+				<mat-error *ngIf="updateForm.get('email').hasError('required')">
+					O email é <strong>obrigatório</strong>
+				</mat-error>
+				<mat-error *ngIf="updateForm.get('email').hasError('email')">
+					Por favor, digite um email <strong>válido</strong>
+				</mat-error>
+			</mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2">
+			<mat-form-field appearance="outline" class="group" hideRequiredMarker>
+				<mat-label>Salário</mat-label>
+				<input type="number" formControlName="salary" matInput>
+				<mat-icon matSuffix>attach_money</mat-icon>
+			</mat-form-field>
+        </mat-grid-tile>
+
+	</mat-grid-list>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+	<button mat-raised-button color="primary" type="submit" [disabled]="!updateForm.valid">
+		{{ isLoading ? 'Carregando...' : 'Atualizar' }}
+	</button>
+</mat-dialog-actions>
+</form>

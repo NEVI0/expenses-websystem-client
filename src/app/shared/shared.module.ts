@@ -23,6 +23,7 @@ import {
 import { AddExpenseComponent } from './add-expense/add-expense.component';
 import { DetailComponent } from './detail/detail.component';
 import { ModalComponent } from './modal/modal.component';
+import { UpdateAccountComponent } from './update-account/update-account.component';
 
 @NgModule({
     imports: [
@@ -44,12 +45,14 @@ import { ModalComponent } from './modal/modal.component';
     entryComponents: [
         AddExpenseComponent,
         DetailComponent,
-        ModalComponent
+        ModalComponent,
+        UpdateAccountComponent
     ],
     declarations: [
         AddExpenseComponent,
         DetailComponent,
         ModalComponent,
+        UpdateAccountComponent,
     ]
 })
 
