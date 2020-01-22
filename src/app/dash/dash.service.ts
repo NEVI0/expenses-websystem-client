@@ -74,6 +74,12 @@ export class DashService {
 	/* FIM */
 
 	/* Requisições para Usuário */
+	updateUser(_id: string, body) {
+		return this.http.put(`${this.BlockedApiUrl}/userSimple/${_id}`, body, {
+			headers: this.headers
+		}).pipe(take(1));
+	}
+
 	deleteUser(_id: string) {
 		return this.http.delete(`${this.BlockedApiUrl}/user/${_id}`, {
 			headers: this.headers

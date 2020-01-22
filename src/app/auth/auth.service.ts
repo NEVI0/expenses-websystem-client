@@ -14,7 +14,7 @@ export class AuthService {
     private readonly OpenedApiUrl = environment.OpenApiUrl;
     private readonly AppUserData = environment.AppUserData;
 
-    private _user = JSON.parse(localStorage.getItem(this.AppUserData));
+    public _user = JSON.parse(localStorage.getItem(this.AppUserData));
 
     constructor(
         private http: HttpClient
