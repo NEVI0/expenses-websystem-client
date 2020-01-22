@@ -1,0 +1,12 @@
+<!-- Conteudo -->
+<h2 mat-dialog-title align="center" class="title">Alerta!</h2>
+
+<mat-dialog-content>
+    {{ data.msg }}
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+    <button mat-button mat-dialog-close>{{ data.close }}</button>
+    <button mat-raised-button color="warn" (click)="onAction()">{{ data.action }}</button>
+</mat-dialog-actions>
+<!-- FIM -->
