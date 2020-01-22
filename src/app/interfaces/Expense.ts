@@ -6,6 +6,5 @@ export interface Expense {
 	date: Date;
 	createdAt: Date;
 	userId: string;
-	userData: Array<any>;
 	tags: Array<string>;
 }
