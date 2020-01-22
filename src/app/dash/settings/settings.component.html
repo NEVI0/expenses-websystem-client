@@ -11,12 +11,12 @@
 	<mat-card>
 		<mat-card-content class="flex">
 			<div class="left">
-				<b>Mudar para tema {{ darkMode == false ? 'Escuro' : 'Claro' }}: </b>
+				<b>Escolher Tema: </b>
 			</div>
 			<div class="right">
-				<button mat-raised-button color="accent" (click)="onChangeTheme()">
-					Tema {{ darkMode == false ? 'Escuro' : 'Claro' }}
-				</button>
+				<mat-slide-toggle (change)="onChangeTheme()" [checked]="darkMode == true">
+					Escuro
+				</mat-slide-toggle>
 			</div>
 		</mat-card-content>
 	</mat-card>
@@ -33,7 +33,9 @@
 				<b>Permitir que o sistema te envie Emails: </b>
 			</div>
 			<div class="right">
-				<button mat-raised-button color="accent">Permitir</button>
+				<mat-slide-toggle>
+					Permitir
+				</mat-slide-toggle>
 			</div>
 		</mat-card-content>
 	</mat-card>
