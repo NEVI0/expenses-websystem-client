@@ -16,6 +16,11 @@
 			<small>{{ userData.email }}</small>
 		</h3>
 	</div>
+	<div class="btn">
+		<button mat-icon-button matTooltip="Editar Dados">
+			<mat-icon>edit</mat-icon>
+		</button>
+	</div>
 </div>
 <!-- FIM -->
 
@@ -36,7 +41,7 @@
 					<mat-icon mat-list-icon color="primary">attach_money</mat-icon>
 					<h3 mat-line class="listTitle">Salário</h3>
 					<div align="end">
-						<p>{{ dataCtrl.userSalary | currency }}</p>
+						<p>{{ userData.salary | currency }}</p>
 					</div>
 				</mat-list-item>
 				<mat-list-item>
@@ -67,14 +72,14 @@
 					<mat-icon mat-list-icon color="primary">person</mat-icon>
 					<h3 mat-line class="listTitle">Nome de Usuário</h3>
 					<div align="end">
-						<p>{{ dataCtrl.userName }}</p>
+						<p>{{ userData.name }}</p>
 					</div>
 				</mat-list-item>
 				<mat-list-item>
 					<mat-icon mat-list-icon color="primary">email</mat-icon>
 					<h3 mat-line class="listTitle">Email</h3>
 					<div align="end">
-						<p>{{ dataCtrl.userEmail }}</p>
+						<p>{{ userData.email }}</p>
 					</div>
 				</mat-list-item>
 
@@ -107,25 +112,6 @@
 <!-- FIM -->
 
 <!-- Configurações de Conta -->
-<div class="content">
-
-	<h3 class="subtitle">Atualizar Dados da Conta</h3>
-	<p class="description">É possivel que você não queira mais que os seus dados pessoais sejam os atuais ou que você tenha perdido o seu email e tenha que trocar aqui, na opção abaixo é possivel atualizar os seus dados.</p>
-	<mat-card>
-		<mat-card-content class="flex">
-			<div class="left">
-				<b>Click no botão para atualizar seus Dados: </b>
-			</div>
-			<div class="right">
-				<button mat-raised-button color="accent">
-					Atualizar
-				</button>
-			</div>
-		</mat-card-content>
-	</mat-card>
-
-</div>
-
 <div class="content">
 
 	<h3 class="subtitle">Redefinir Senha</h3>
@@ -166,7 +152,7 @@
 
 <div class="content">
 
-	<h3 class="subtitle">Deletar Conta</h3>
+	<h3 class="subtitleWarn">Deletar Conta</h3>
 	<p class="description">Utilize essa opção se você não quiser mais possuir uma conta no nosso sistema. Lembre-se que quando sua conta for excluida, você não poderá mais recupera-lá.</p>
 	<mat-card>
 		<mat-card-content class="flex">
@@ -174,7 +160,7 @@
 				<b>Click no botão para excluir sua Conta: </b>
 			</div>
 			<div class="right">
-				<button mat-raised-button color="accent">
+				<button mat-raised-button color="warn" (click)="onShowAlert()">
 					Excluir Conta
 				</button>
 			</div>

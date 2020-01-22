@@ -36,11 +36,6 @@ export class AddExpenseComponent implements OnInit {
 
     onAddExpense() {
         this.addForm.value.userId = this.authService.user._id;
-        this.addForm.value.userData = [{
-            userName: this.authService.user.name,
-            userEmail: this.authService.user.email,
-            userSalary: this.authService.user.salary
-        }];
 
         if (this.addForm.value.description == '' || this.addForm.value.description == null) {
             this.addForm.value.description = "Sem Descrição";
@@ -62,11 +57,10 @@ export class AddExpenseComponent implements OnInit {
                 this.router.navigate(['/dash/all-expenses']);
             },
             err => {
-                this.snackbar.open("Ver error: Ctrl + Shift + i", "Ok", {
+                this.snackbar.open(err.error.errorMsg, "Ok", {
                     duration: 3500
                 });
                 this.dialog.closeAll();
-                console.log(err)
             }
         );
     }

@@ -7,6 +7,8 @@ import { Expense } from '../../interfaces/Expense';
 import { DataController } from '../../interfaces/DataController';
 import { DashService } from '../dash.service';
 import { DetailComponent } from '../../shared/detail/detail.component';
+import { AuthService } from '../../auth/auth.service';
+import { AddExpenseComponent } from 'src/app/shared/add-expense/add-expense.component';
 
 @Component({
 	selector: 'app-home-page',
@@ -20,6 +22,7 @@ export class HomePageComponent implements OnInit {
 	dataCtrl$: Observable<DataController>;
 	error$ = new Subject<boolean>();
 
+	userSalary: number = this.authService.user.salary;
 	numberOfExpenses: number;
 	panelOpenState: boolean = false;
 	isDanger: boolean = false;
@@ -27,7 +30,8 @@ export class HomePageComponent implements OnInit {
 
   	constructor(
 		private dashService: DashService,
-		private dialog: MatDialog
+		private dialog: MatDialog,
+		private authService: AuthService
 	) {}
 
 	ngOnInit() {
@@ -46,7 +50,7 @@ export class HomePageComponent implements OnInit {
 		);
 		this.dataCtrl$ = this.dashService.getUserController().pipe(
 			tap(resp => {
-				this.calc = resp.userSalary - resp.sumOfValues;
+				this.calc = this.authService.user.salary - resp.sumOfValues;
 				if (this.calc >= 0) {
 					this.isDanger = false;
 				} else {
@@ -66,6 +70,15 @@ export class HomePageComponent implements OnInit {
 			data: { _id }
 		});
 		dialogRef.afterClosed().subscribe();
+	}
+
+	openDialog() {
+		const dialogRef = this.dialog.open(AddExpenseComponent, {
+            width: "400px"
+        });
+        dialogRef.afterClosed().subscribe(resp => {
+			console.log(`Dialog Result: ${resp}`);
+		});
 	}
 
 }

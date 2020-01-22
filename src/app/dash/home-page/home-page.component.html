@@ -7,32 +7,40 @@
 
 <div *ngIf="dataCtrl$ | async as dataCtrl; else primaryLoading">
 
-	<mat-accordion class="mat-elevation-z8">
-		<mat-expansion-panel>
-			<mat-expansion-panel-header>
-				<mat-panel-title>
-				 	Veja seu Lucro
-				</mat-panel-title>
-			</mat-expansion-panel-header>
+	<div *ngIf="dataCtrl.numberOfExpenses == 0 || dataCtrl == null; else someData" align="center">
+		<p>Você precisa adicinar despesas para o sistema calcular os seus gastos.</p>
+	</div>
 
-			<mat-list class="list">
-				<mat-list-item>
-					<mat-icon mat-list-icon color="primary">trending_up</mat-icon>
-					<h3 mat-line class="listTitle">Salário: {{ dataCtrl.userSalary | currency }}</h3>
-					<p mat-line>Despesas: {{ dataCtrl.sumOfValues | currency }}</p>
-					<div align="end">
-						<p mat-line
-							[ngClass]="{
-								'danger': isDanger,
-								'success': !isDanger
-							}"
-						>{{ calc | currency }}</p>
-					</div>
-				</mat-list-item>
-			</mat-list>
+	<!-- Carrega o DataController -->
+	<ng-template #someData>
+		<mat-accordion class="mat-elevation-z8">
+			<mat-expansion-panel>
+				<mat-expansion-panel-header>
+					<mat-panel-title>
+						Veja seu Lucro
+					</mat-panel-title>
+				</mat-expansion-panel-header>
 
-		</mat-expansion-panel>
-	</mat-accordion>
+				<mat-list class="list">
+					<mat-list-item>
+						<mat-icon mat-list-icon color="primary">trending_up</mat-icon>
+						<h3 mat-line class="listTitle">Salário: {{ userSalary | currency }}</h3>
+						<p mat-line>Despesas: {{ dataCtrl.sumOfValues | currency }}</p>
+						<div align="end">
+							<p mat-line
+								[ngClass]="{
+									'danger': isDanger,
+									'success': !isDanger
+								}"
+							>{{ calc | currency }}</p>
+						</div>
+					</mat-list-item>
+				</mat-list>
+
+			</mat-expansion-panel>
+		</mat-accordion>
+	</ng-template>
+	<!-- FIM -->
 
 </div>
 
@@ -64,8 +72,9 @@
 <div *ngIf="expenses$ | async as expenses; else secondyLoading">
 
 	<!-- Verifica se existe alguma Despesa, senão carrega o ng-template -->
-	<div *ngIf="expenses.length == 0; else someExpenses" align="center">
-		<p>Não há nenhuma Despesa</p>
+	<div *ngIf="expenses == undefined || expenses == null || expenses.length == 0; else someExpenses" align="center">
+		<p>Você não possui nenhuma despesa cadastrada!</p>
+		<button mat-raised-button color="primary" (click)="openDialog()">Adicionar Despesa</button>
 	</div>
 	<!-- FIM -->
 

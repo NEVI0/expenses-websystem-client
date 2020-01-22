@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject, empty } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
+import { MatDialog } from '@angular/material';
 
 import { DataController } from '../../interfaces/DataController';
 import { DashService } from '../dash.service';
 import { User } from '../../interfaces/User';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
+import { environment } from '../../../environments/environment';
+import { ModalComponent } from 'src/app/shared/modal/modal.component';
 
 @Component({
     selector: 'app-account',
@@ -15,17 +18,18 @@ import { AuthService } from 'src/app/auth/auth.service';
 
 export class AccountComponent implements OnInit {
 
+	private readonly AppUserData = environment.AppUserData;
+
     dataCtrl$: Observable<DataController>;
 	error$ = new Subject<boolean>();
 
 	userData: User = this.authService.user;
-
-	numberOfExpenses: number;
 	isLoading: boolean = false;
 
 	constructor(
 		private dashService: DashService,
-		private authService: AuthService
+		private authService: AuthService,
+		private dialog: MatDialog
 	) {}
 
 	ngOnInit() {
@@ -43,6 +47,18 @@ export class AccountComponent implements OnInit {
 				return empty();
 			})
 		);
+	}
+
+	onShowAlert() {
+		this.dialog.open(ModalComponent, {
+			width: "350px",
+			data: {
+				msg: "Tem certeza que você quer deletar sua conta? Lembre-se que você não poderá mais recupera-lá.",
+				close: "Não",
+				action: "Sim, quero deletar!",
+				_id: this.userData._id
+			}
+		});
 	}
 
 }

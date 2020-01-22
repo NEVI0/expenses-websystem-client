@@ -32,6 +32,16 @@
 	color: #8D8D8D;
 }
 
+.avatar .btn {
+	width: 100%;
+	text-align: right;
+}
+
+.avatar .btn button {
+	margin-top: 30px;
+	margin-right: 10px;
+}
+
 mat-list {
 	cursor: default;
 }
@@ -48,6 +58,10 @@ mat-list .listTitle {
 
 .content .subtitle {
 	color: #00ACC1;
+}
+
+.content .subtitleWarn {
+	color: #E53935;
 }
 
 .content .flex {

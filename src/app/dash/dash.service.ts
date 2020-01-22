@@ -25,6 +25,7 @@ export class DashService {
 		'Authorization': this.authService.user.token
 	});
 
+	/* Requisições para as Despesas */
 	getExpenses() {
 		return this.http.get<Expense[]>(`${this.BlockedApiUrl}/expenses/${this.UserId}`, {
 			headers: this.headers
@@ -70,5 +71,14 @@ export class DashService {
 			headers: this.headers
 		}).pipe(take(1));
 	}
+	/* FIM */
+
+	/* Requisições para Usuário */
+	deleteUser(_id: string) {
+		return this.http.delete(`${this.BlockedApiUrl}/user/${_id}`, {
+			headers: this.headers
+		}).pipe(take(1));
+	}
+	/* FIM */
 
 }

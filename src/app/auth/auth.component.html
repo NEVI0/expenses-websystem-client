@@ -36,7 +36,7 @@
                         <mat-checkbox>Lembre de Mim!</mat-checkbox>
 
                         <button type="submit" color="primary" class="login-button" mat-raised-button
-                            [disabled]="loginForm.get('password').hasError('required') || loginForm.get('email').hasError('required')"
+                            [disabled]="!loginForm.valid"
                         >
                             {{ isLoading ? 'Carregando...' : 'Login' }}
                         </button>
@@ -94,7 +94,7 @@
                             <mat-icon matSuffix>lock</mat-icon>
 
                             <mat-error *ngIf="signupForm.get('conf_password').hasError('required')">
-                                As Senhas <strong>não</strong> são iguais
+                                A confirmação de Senha é <strong>obrigatória</strong>
                             </mat-error>
 
                         </mat-form-field>

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
 
 import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment';
 
 @Component({
     selector: 'app-auth',
@@ -12,6 +14,8 @@ import { AuthService } from './auth.service';
 
 export class AuthComponent implements OnInit {
 
+    private readonly AppUserData = environment.AppUserData;
+
     loginForm: FormGroup;
     signupForm: FormGroup;
     isLoading: boolean = false;
@@ -19,7 +23,8 @@ export class AuthComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private authService: AuthService,
-        private router: Router
+        private router: Router,
+        private snackbar: MatSnackBar
     ) {}
 
     ngOnInit() {
@@ -42,11 +47,20 @@ export class AuthComponent implements OnInit {
                 this.isLoading = false;
                 this.signupForm.reset();
                 this.router.navigate(['/dash']);
-                localStorage.setItem("_application_user_data", JSON.stringify(resp));
+                localStorage.setItem(this.AppUserData, JSON.stringify(resp));
             },
             err => {
                 this.isLoading = false;
-                console.log(err)
+
+                if (err.error.errorMsg == undefined || err.error.errorMsg == null || err.error.errorMsg == '') {
+                    this.snackbar.open("Ocorreu um error no Servidor! Tente mais tarde", "Ok", {
+                        duration: 3500
+                    });
+                } else {
+                    this.snackbar.open(err.error.errorMsg, "Ok", {
+                        duration: 3500
+                    });
+                }
             }
         );
 
@@ -54,17 +68,25 @@ export class AuthComponent implements OnInit {
 
     onSignup() {
         this.isLoading = true;
-        this.signupForm.value.salary = 1000;
         this.authService.signup(this.signupForm.value).subscribe(
             resp => {
                 this.isLoading = false;
                 this.signupForm.reset();
                 this.router.navigate(['/dash']);
-                localStorage.setItem("_application_user_data", JSON.stringify(resp));
+                localStorage.setItem(this.AppUserData, JSON.stringify(resp));
             },
             err => {
                 this.isLoading = false;
-                console.log(err)
+
+                if (err.error.errorMsg == undefined || err.error.errorMsg == null || err.error.errorMsg == '') {
+                    this.snackbar.open("Ocorreu um error no Servidor! Tente mais tarde", "Ok", {
+                        duration: 3500
+                    });
+                } else {
+                    this.snackbar.open(err.error.errorMsg, "Ok", {
+                        duration: 3500
+                    });
+                }
             }
         );
     }

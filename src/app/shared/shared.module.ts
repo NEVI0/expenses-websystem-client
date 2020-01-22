@@ -5,9 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 
-/* Components */
-import { AddExpenseComponent } from './add-expense/add-expense.component';
-
 /* Angular Material */
 import {
     MatDialogModule,
@@ -21,8 +18,11 @@ import {
     MatProgressSpinnerModule,
     MatListModule
 } from '@angular/material';
-import { DetailComponent } from './detail/detail.component';
 
+/* Components */
+import { AddExpenseComponent } from './add-expense/add-expense.component';
+import { DetailComponent } from './detail/detail.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
     imports: [
@@ -43,14 +43,13 @@ import { DetailComponent } from './detail/detail.component';
     ],
     entryComponents: [
         AddExpenseComponent,
-        DetailComponent
+        DetailComponent,
+        ModalComponent
     ],
     declarations: [
         AddExpenseComponent,
-        DetailComponent
-    ],
-    exports: [
-        DetailComponent
+        DetailComponent,
+        ModalComponent,
     ]
 })
 
