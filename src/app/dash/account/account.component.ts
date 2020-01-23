@@ -65,7 +65,11 @@ export class AccountComponent implements OnInit {
 			width: "400px"
 		});
 		dialogRef.afterClosed().subscribe(resp => {
-			this.onRefresh();
+			if (resp == undefined) {
+				this.onRefresh();
+			} else {
+				console.log("Closed!");
+			}
 		});
 	}
 

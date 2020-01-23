@@ -76,9 +76,7 @@ export class HomePageComponent implements OnInit {
 		const dialogRef = this.dialog.open(AddExpenseComponent, {
             width: "400px"
         });
-        dialogRef.afterClosed().subscribe(resp => {
-			console.log(`Dialog Result: ${resp}`);
-		});
+        dialogRef.afterClosed().subscribe();
 	}
 
 }
