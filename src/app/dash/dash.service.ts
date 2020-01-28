@@ -56,6 +56,14 @@ export class DashService {
 		);
 	}
 
+	search(body) {
+		return this.http.post<Expense[]>(`${this.BlockedApiUrl}/search`, body, {
+			headers: this.headers
+		}).pipe(
+			tap(resp => resp)
+		);
+	}
+
 	insertExpense(body) {
 		return this.http.post(`${this.BlockedApiUrl}/expenses/`, body, {
 			headers: this.headers
@@ -74,8 +82,14 @@ export class DashService {
 	/* FIM */
 
 	/* Requisições para Usuário */
+	forgotPass(email: string) {
+		return this.http.post<any>(`${this.BlockedApiUrl}/forgotPass`, { email }, {
+			headers: this.headers
+		}).pipe(take(1));
+	}
+
 	updateUser(_id: string, body) {
-		return this.http.put(`${this.BlockedApiUrl}/userSimple/${_id}`, body, {
+		return this.http.put(`${this.BlockedApiUrl}/user/${_id}`, body, {
 			headers: this.headers
 		}).pipe(take(1));
 	}

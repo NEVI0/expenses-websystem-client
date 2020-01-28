@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject, empty } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 
 import { DataController } from '../../interfaces/DataController';
 import { DashService } from '../dash.service';
@@ -27,7 +27,8 @@ export class AccountComponent implements OnInit {
 	constructor(
 		private dashService: DashService,
 		private authService: AuthService,
-		private dialog: MatDialog
+		private dialog: MatDialog,
+		private snackbar: MatSnackBar
 	) {}
 
 	ngOnInit() {
@@ -67,10 +68,23 @@ export class AccountComponent implements OnInit {
 		dialogRef.afterClosed().subscribe(resp => {
 			if (resp == undefined) {
 				this.onRefresh();
-			} else {
-				console.log("Closed!");
 			}
 		});
+	}
+
+	onForgotPass() {
+		this.dashService.forgotPass(this.authService.user.email).subscribe(
+			resp => {
+				this.snackbar.open("Um email foi enviado para você!", "Ok", {
+					duration: 3500
+				});
+			},
+			err => {
+				this.snackbar.open("Ocorreu um error! Tente Novamente", "Ok", {
+					duration: 3500
+				});
+			}
+		);
 	}
 
 }

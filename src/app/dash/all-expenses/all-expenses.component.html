@@ -6,19 +6,59 @@
 <!-- FIM -->
 
 <!-- Caixa de Pesquisa -->
-<mat-card class="searchBox">
+<mat-card class="searchBox" class="mat-elevation-z8">
+
+	<!-- Input de Pesquisa -->
 	<mat-card-content>
-		<mat-form-field class="group" appearance="outline">
-			<mat-label>Pesquisar Despesa</mat-label>
-			<input matInput>
-			<mat-icon matSuffix>search</mat-icon>
-		</mat-form-field>
+		<form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+
+			<mat-form-field class="group" appearance="outline">
+				<mat-label>Pesquisar Despesa por: nome, data e preço</mat-label>
+				<input matInput formControlName="tag">
+
+				<button type="submit" mat-icon-button matSuffix
+					[disabled]="searchForm.value.tag == null || searchForm.value.tag == ''"
+				>
+					<mat-icon>search</mat-icon>
+				</button>
+			</mat-form-field>
+
+		</form>
 	</mat-card-content>
+	<!-- FIM -->
+
+	<!-- Resultado da Pesquisa -->
+	<div *ngIf="searchData$ | async as searchData;">
+		<mat-divider></mat-divider>
+
+		<mat-list class="list">
+			<h3 mat-subheader>Resultado</h3>
+
+			<div *ngIf="searchData == null || searchData.length == 0; else itemList" align="center">
+				<p>Nada Encontrado!</p>
+			</div>
+
+			<!-- Lista de Resultados -->
+			<ng-template #itemList>
+				<mat-list-item class="item" *ngFor="let item of searchData" (click)="onShowDetail(item._id)">
+					<mat-icon mat-list-icon color="primary">label_important</mat-icon>
+					<h3 mat-line class="listTitle">{{ item.name }}</h3>
+					<p mat-line>{{ item.date | date }}</p>
+					<div align="end">
+						<p mat-line>{{ item.value | currency }}</p>
+					</div>
+				</mat-list-item>
+			</ng-template>
+			<!-- FIM -->
+		</mat-list>
+	</div>
+	<!-- FIM -->
+
 </mat-card>
 <!-- FIM -->
 
 <!-- Div que verifica se há despesas na variavel -->
-<div *ngIf="expenses$ | async as expenses; else loading">
+<div *ngIf="expenses$ | async as expenses; else loading" class="content">
 
 	<!-- Verifica se existe alguma Despesa, senão carrega o ng-template -->
 	<div *ngIf="expenses.length == 0; else allExpenses" align="center">
@@ -39,7 +79,12 @@
 					</mat-panel-title>
 				</mat-expansion-panel-header>
 
-				<mat-table [dataSource]="expenses$" class="table" class="mat-elevation-z8">
+				<mat-table [dataSource]="expenses$" class="table mat-elevation-z8">
+
+					<ng-container matColumnDef="#">
+						<mat-header-cell *matHeaderCellDef row>#</mat-header-cell>
+						<mat-cell *matCellDef="let data"> {{ index }} </mat-cell>
+					</ng-container>
 
 					<ng-container matColumnDef="name">
 						<mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
@@ -51,22 +96,22 @@
 						<mat-cell *matCellDef="let data"> {{ data.value | currency }} </mat-cell>
 					</ng-container>
 
-					<ng-container matColumnDef="createdAt">
+					<ng-container matColumnDef="date">
 						<mat-header-cell *matHeaderCellDef>Data de Criação</mat-header-cell>
-						<mat-cell *matCellDef="let data"> {{ data.createdAt | date }} </mat-cell>
+						<mat-cell *matCellDef="let data"> {{ data.date | date }} </mat-cell>
 					</ng-container>
 
-					<ng-container matColumnDef="actions">
-						<mat-header-cell *matHeaderCellDef>Ações</mat-header-cell>
-						<mat-cell *matCellDef="let data">
-							<button mat-raised-button color="primary" (click)="onShowAlert(data._id)">
-								<mat-icon>delete</mat-icon>
-							</button>
-						</mat-cell>
+					<ng-container matColumnDef="description">
+						<mat-header-cell *matHeaderCellDef>Descrição</mat-header-cell>
+						<mat-cell *matCellDef="let data"> {{ data.description }} </mat-cell>
 					</ng-container>
 
 					<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-					<mat-row *matRowDef=" let row; columns: displayedColumns"></mat-row>
+					<mat-row
+						*matRowDef=" let row; columns: displayedColumns"
+						(click)="onShowDetail(row._id)"
+						class="example-element-row"
+					></mat-row>
 
 				</mat-table>
 

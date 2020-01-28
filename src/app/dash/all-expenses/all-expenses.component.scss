@@ -2,6 +2,34 @@
 	width: 100%;
 }
 
+.group {
+    margin-bottom: -19px;
+}
+
 .searchBox {
-	margin: 15px 0;
+    margin-top: 15px;
+}
+
+.item {
+    cursor: pointer;
+}
+
+.content {
+    margin-top: 20px;
+}
+
+mat-list .listTitle {
+    font-weight: bold;
+}
+
+mat-row.example-element-row {
+    transition: 0.5s ease all;
+}
+
+mat-row.example-element-row:hover {
+    background: #777;
+}
+
+.col {
+    width: 20px;
 }

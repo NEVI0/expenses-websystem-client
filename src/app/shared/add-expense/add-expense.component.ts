@@ -29,7 +29,7 @@ export class AddExpenseComponent implements OnInit {
         this.addForm = this.formBuilder.group({
             name: [ null, Validators.required ],
             value: [ null, Validators.required ],
-            date: [ Date.now, Validators.required ],
+            date: [ null, Validators.required ],
             description: [ null, Validators.maxLength(200) ]
         });
     }
@@ -43,7 +43,8 @@ export class AddExpenseComponent implements OnInit {
 
         this.addForm.value.tags = [
             this.addForm.value.name.toUpperCase(),
-            this.addForm.value.description.toUpperCase()
+            this.addForm.value.value.toString(),
+            this.addForm.value.date
         ];
 
         const stringfy = JSON.stringify(this.addForm.value);

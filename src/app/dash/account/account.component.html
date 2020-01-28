@@ -8,7 +8,7 @@
 <!-- Avatar -->
 <div class="avatar">
 	<div class="image">
-		<img src="https://material.angular.io/assets/img/examples/shiba1.jpg">
+		<img src="assets/images/user.png">
 	</div>
 	<div class="userData">
 		<h3>
@@ -115,34 +115,15 @@
 <div class="content">
 
 	<h3 class="subtitle">Redefinir Senha</h3>
-	<p class="description">Por motivos de segurança, deixamos a atualização de dados e a redefinição de senha separados, para que haja um melhor controle e segurança da sua conta.</p>
+	<p class="description">Por motivos de segurança, deixamos a atualização de dados e a redefinição de senha separados, para que haja o melhor controle de segurança da sua conta. Nesta opção, será enviado um email para que você possa redefinir sua senha.</p>
 	<mat-card>
 		<mat-card-content class="flex">
 			<div class="left">
 				<b>Click no botão para redefinir a sua Senha: </b>
 			</div>
 			<div class="right">
-				<button mat-raised-button color="accent">
+				<button mat-raised-button color="accent" (click)="onForgotPass()">
 					Redefinir Senha
-				</button>
-			</div>
-		</mat-card-content>
-	</mat-card>
-
-</div>
-
-<div class="content">
-
-	<h3 class="subtitle">Recuperar Minha Senha</h3>
-	<p class="description">Utilize essa opção para recuperar a sua senha caso você tenha a esquecido.</p>
-	<mat-card>
-		<mat-card-content class="flex">
-			<div class="left">
-				<b>Click no botão para te enviarmos a sua senha: </b>
-			</div>
-			<div class="right">
-				<button mat-raised-button color="accent">
-					Enviar Email
 				</button>
 			</div>
 		</mat-card-content>
