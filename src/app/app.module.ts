@@ -31,6 +31,7 @@ import { MenuComponent } from './dash/nav-bar/menu/menu.component';
 
 import { RoutesModule } from './app.routing.module';
 import { SharedModule } from './shared/shared.module';
+import { ResetPassComponent } from './reset-pass/reset-pass.component';
 
 const MaterialModules = [
     MatTableModule, MatIconModule, MatButtonModule,
@@ -63,7 +64,8 @@ const MaterialModules = [
         FloatingBtnComponent,
         NavBarComponent,
         SettingsComponent,
-        MenuComponent
+        MenuComponent,
+        ResetPassComponent
     ],
     providers: [],
     bootstrap: [AppComponent]
