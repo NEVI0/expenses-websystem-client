@@ -88,6 +88,12 @@ export class DashService {
 		}).pipe(take(1));
 	}
 
+	resetPass(body) {
+		return this.http.post<any>(`${this.BlockedApiUrl}/resetPass`, body, {
+			headers: this.headers
+		}).pipe(take(1));
+	}
+
 	updateUser(_id: string, body) {
 		return this.http.put(`${this.BlockedApiUrl}/user/${_id}`, body, {
 			headers: this.headers
