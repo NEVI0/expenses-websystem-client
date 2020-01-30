@@ -10,51 +10,42 @@
 
 	<!-- Input de Pesquisa -->
 	<mat-card-content>
-		<form [formGroup]="searchForm" (ngSubmit)="onSearch()">
 
-			<mat-form-field class="group" appearance="outline">
-				<mat-label>Pesquisar Despesa por: nome, data e preço</mat-label>
-				<input matInput formControlName="tag">
+		<mat-form-field class="group" appearance="outline">
+			<mat-label>Pesquisar Despesa por: nome, data e preço</mat-label>
+			<input matInput [formControl]="tag">
 
-				<button type="submit" mat-icon-button matSuffix
-					[disabled]="searchForm.value.tag == null || searchForm.value.tag == ''"
-				>
-					<mat-icon>search</mat-icon>
-				</button>
-			</mat-form-field>
+			<mat-icon matSuffix>search</mat-icon>
+		</mat-form-field>
 
-		</form>
 	</mat-card-content>
 	<!-- FIM -->
 
-	<!-- Resultado da Pesquisa -->
-	<div *ngIf="searchData$ | async as searchData;">
-		<mat-divider></mat-divider>
-
-		<mat-list class="list">
-			<h3 mat-subheader>Resultado</h3>
-
-			<div *ngIf="searchData == null || searchData.length == 0; else itemList" align="center">
-				<p>Nada Encontrado!</p>
-			</div>
-
-			<!-- Lista de Resultados -->
-			<ng-template #itemList>
-				<mat-list-item class="item" *ngFor="let item of searchData" (click)="onShowDetail(item._id)">
-					<mat-icon mat-list-icon color="primary">label_important</mat-icon>
-					<h3 mat-line class="listTitle">{{ item.name }}</h3>
-					<p mat-line>{{ item.date | date }}</p>
-					<div align="end">
-						<p mat-line>{{ item.value | currency }}</p>
-					</div>
-				</mat-list-item>
-			</ng-template>
-			<!-- FIM -->
-		</mat-list>
-	</div>
-	<!-- FIM -->
-
 </mat-card>
+<!-- FIM -->
+
+<!-- Resultado da Pesquisa -->
+<div *ngIf="results$ | async as results">
+	<mat-list class="list">
+
+		<div *ngIf="results == null || results.length == 0; else itemList" align="center">
+			<p>Nada Encontrado!</p>
+		</div>
+
+		<!-- Lista de Resultados -->
+		<ng-template #itemList>
+			<mat-list-item class="item" *ngFor="let item of results" (click)="onShowDetail(item._id)">
+				<mat-icon mat-list-icon color="primary">label_important</mat-icon>
+				<h3 mat-line class="listTitle">{{ item.name }}</h3>
+				<p mat-line>{{ item.date | date }}</p>
+				<div align="end">
+					<p mat-line>{{ item.value | currency }}</p>
+				</div>
+			</mat-list-item>
+		</ng-template>
+		<!-- FIM -->
+	</mat-list>
+</div>
 <!-- FIM -->
 
 <!-- Div que verifica se há despesas na variavel -->

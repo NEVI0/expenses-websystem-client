@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Observable, Subject, empty } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { tap, catchError, map, distinctUntilChanged, debounceTime, switchMap } from 'rxjs/operators';
 
 import { Expense } from '../../interfaces/Expense';
 import { DashService } from '../dash.service';
-import { DetailComponent } from 'src/app/shared/detail/detail.component';
+import { DetailComponent } from '../../shared/detail/detail.component';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
     selector: 'app-all-expenses',
@@ -17,49 +18,40 @@ import { DetailComponent } from 'src/app/shared/detail/detail.component';
 export class AllExpensesComponent implements OnInit {
 
 	expenses$: Observable<Expense[]>;
-	searchData$: Observable<Expense[]>;
-	error$ = new Subject<boolean>();
+	results$: Observable<Expense[]>;
 
-	searchForm: FormGroup;
+	tag = new FormControl();
 
 	displayedColumns: string[];
 	isLoading: boolean = false;
+	totalResults: number;
 	index: number = 1;
 
 	constructor(
 		private dashService: DashService,
+		private authService: AuthService,
 		private dialog: MatDialog,
-		private formBuilder: FormBuilder,
 		private snackbar: MatSnackBar
 	) {}
 
 	ngOnInit() {
 		this.onRefresh();
 		this.displayedColumns = ['#', 'name', 'value', 'date', 'description'];
-		this.searchForm = this.formBuilder.group({
-			tag: [ null ]
-		});
-	}
 
-	onRefresh() {
-		this.expenses$ = this.dashService.getExpenses().pipe(
-			catchError(err => {
-				this.error$.next(err);
-				return empty();
+		this.results$ = this.tag.valueChanges.pipe(
+			map(result => result.trim()),
+			debounceTime(250),
+			distinctUntilChanged(),
+			switchMap(result => this.dashService.search(this.authService.user._id, result)),
+			tap((result: any) => {
+				this.totalResults = result.length;
+				console.log(result);
 			})
 		);
 	}
 
-	onSearch() {
-		const stringfy = JSON.stringify(this.searchForm.value);
-		this.searchData$ = this.dashService.search(JSON.parse(stringfy)).pipe(
-			catchError(err => {
-				this.snackbar.open(err.error.errorMsg, "Ok", {
-					duration: 3500
-				});
-				return empty();
-			})
-		)
+	onRefresh() {
+		this.expenses$ = this.dashService.getExpenses();
 	}
 
 	onShowDetail(_id: string) {
@@ -67,14 +59,6 @@ export class AllExpensesComponent implements OnInit {
 			width: "400px",
 			data: { _id: _id }
 		});
-	}
-
-	onShowAlert(_id: string) {
-		console.log("Mosta uma mensagem de alerta!");
-	}
-
-	onShowInfo(_id) {
-		console.log(_id);
 	}
 
 }

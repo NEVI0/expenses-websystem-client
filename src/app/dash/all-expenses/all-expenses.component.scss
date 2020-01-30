@@ -3,7 +3,7 @@
 }
 
 .group {
-    margin-bottom: -19px;
+    bottom: -10px;
 }
 
 .searchBox {
@@ -12,6 +12,13 @@
 
 .item {
     cursor: pointer;
+    transition: 0.5s ease all;
+    border-radius: 3px;
+    margin-bottom: 2px;
+}
+
+.item:hover {
+    background-color: #777;
 }
 
 .content {
