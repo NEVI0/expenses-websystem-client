@@ -56,8 +56,8 @@ export class DashService {
 		);
 	}
 
-	search(body) {
-		return this.http.post<Expense[]>(`${this.BlockedApiUrl}/search`, body, {
+	search(_id: string, tag: string) {
+		return this.http.get<Expense[]>(`${this.BlockedApiUrl}/search/${_id}?tag=${tag}`, {
 			headers: this.headers
 		}).pipe(
 			tap(resp => resp)
