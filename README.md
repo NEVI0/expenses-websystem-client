@@ -1,27 +1,45 @@
-# DespesasClient
+# Web System - Personal Expenses
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.12.
+Hello, my name is Névio Costa Magagnin, in this repository, I'm trying to create a Web System to Personal Expenses
 
-## Development server
+To code, I've been using Node and MongoDB to do the Backend (API), and to do the Frontend (Client Side), I've been using the Angular and Materialize to create a awesome interface. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# To-Do List
 
-## Code scaffolding
+* Create a Signup / Login page :ballot_box_with_check:
+* Create the user authentication :ballot_box_with_check:
+* Create a guard to block the navigation without authentication :ballot_box_with_check:
+* Create a dashboard :ballot_box_with_check:
+* Create the pages: Home, All Expenses, Settings and Account :ballot_box_with_check:
+* Create a button to switch the application theme :ballot_box_with_check:
+* Create a form to add new expenses :ballot_box_with_check:
+* Create a list to the expenses :ballot_box_with_check:
+* Create the searchbox :ballot_box_with_check:
+* Make the searchbox works out :ballot_box_with_check:
+* Make the User CRUD :ballot_box_with_check:
+* Make a form to change the user image :x:
+* Make the AVG of expenses by month :x:
+* Improve the application style :x:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Configurations
 
-## Build
+* Angular Material:
+	`ng add @angular/material`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+* HammerJS:
+	`npm install --save hammerjs`
 
-## Running unit tests
+* In the **main.ts** file:
+	`import 'hammerjs'`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+#Links
 
-## Running end-to-end tests
+* [Angular](https://angular.io/docs "Angular Website")
+* [Angular CLI](https://cli.angular.io/ "Angular CLI Website")
+* [Angular Material](https://material.angular.io/components/categories "Angular Material Website")
+* [Material Design](https://material.io/ "About Material Design")
+* [Node](https://nodejs.org/en/ "Mode Website")
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+# Important
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Angular's Awesome!!! hushushushus
