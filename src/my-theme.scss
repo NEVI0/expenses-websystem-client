@@ -3,14 +3,14 @@
 @include mat-core();
 
 /* Light Colors */
-$color-primary: mat-palette($mat-light-blue, 600);
-$color-accent: mat-palette($mat-cyan, 600);
-$color-warn: mat-palette($mat-red, 600);
+$color-primary: mat-palette($mat-deep-purple, A700);
+$color-accent: mat-palette($mat-deep-purple, A200);
+$color-warn: mat-palette($mat-red, 700);
 
 /* Dark Colors */
-$alt-color-primary: mat-palette($mat-light-blue, 600);
-$alt-color-accent: mat-palette($mat-cyan, 600);
-$alt-color-warn: mat-palette($mat-red, 600);
+$alt-color-primary: mat-palette($mat-deep-purple, A700);
+$alt-color-accent: mat-palette($mat-deep-purple, A200);
+$alt-color-warn: mat-palette($mat-red, 700);
 
 $my-light-theme: mat-light-theme($color-primary, $color-accent, $color-warn);
 $my-dark-theme: mat-dark-theme($alt-color-primary, $alt-color-accent, $alt-color-warn);

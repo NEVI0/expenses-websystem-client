@@ -37,7 +37,7 @@
 			<mat-list-item class="item" *ngFor="let item of results" (click)="onShowDetail(item._id)">
 				<mat-icon mat-list-icon color="primary">label_important</mat-icon>
 				<h3 mat-line class="listTitle">{{ item.name }}</h3>
-				<p mat-line>{{ item.date | date }}</p>
+				<p mat-line>{{ item.date }}</p>
 				<div align="end">
 					<p mat-line>{{ item.value | currency }}</p>
 				</div>
@@ -89,7 +89,7 @@
 
 					<ng-container matColumnDef="date">
 						<mat-header-cell *matHeaderCellDef>Data de Criação</mat-header-cell>
-						<mat-cell *matCellDef="let data"> {{ data.date | date }} </mat-cell>
+						<mat-cell *matCellDef="let data"> {{ data.date }} </mat-cell>
 					</ng-container>
 
 					<ng-container matColumnDef="description">

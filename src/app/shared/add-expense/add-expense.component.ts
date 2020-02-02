@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { map, tap, filter } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { DashService } from '../../dash/dash.service';
@@ -15,7 +14,8 @@ import { AuthService } from '../../auth/auth.service';
 
 export class AddExpenseComponent implements OnInit {
 
-    addForm: FormGroup
+    addForm: FormGroup;
+    total: number = 0;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -27,29 +27,45 @@ export class AddExpenseComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+        const date = {
+            d: new Date().getDate(),
+            m: new Date().getMonth(),
+            y: new Date().getFullYear()
+        }
+
+        var d = null;
+        var m = null;
+
+        if (date.d >= 1 && date.d <= 9) d = "0" + date.d;
+        if (date.m >= 1 && date.m <= 9) m = "0" + (date.m + 1);
+
         this.addForm = this.formBuilder.group({
             name: [ null, Validators.required ],
             value: [ null, Validators.required ],
-            date: [ null, [
+            date: [ `${d}/${m}/${date.y}`, [
                 Validators.required,
                 Validators.maxLength(10),
-                Validators.pattern('^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[12][0-9]{3}$')
+                Validators.pattern("^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[12][0-9]{3}$")
             ] ],
             description: [ null, Validators.maxLength(200) ]
+        });
+
+        this.addForm.valueChanges.subscribe(form => {
+            if (form.description !== null) this.total = form.description.length
         });
     }
 
     onAddExpense() {
         this.addForm.value.userId = this.authService.user._id;
 
-        if (this.addForm.value.description == '' || this.addForm.value.description == null) {
+        if (this.addForm.value.description == "" || this.addForm.value.description == null) {
             this.addForm.value.description = "Sem Descrição";
         }
 
         this.addForm.value.tags = [
             this.addForm.value.name.toUpperCase(),
             this.addForm.value.value.toString(),
-            this.addForm.value.date
+            this.addForm.value.date.toString()
         ];
 
         const stringfy = JSON.stringify(this.addForm.value);
@@ -60,7 +76,7 @@ export class AddExpenseComponent implements OnInit {
                 this.snackbar.open("Despesa adicionada com sucesso!", "Ok", {
                     duration: 3500
                 });
-                this.router.navigate(['/dash/all-expenses']);
+                this.router.navigate(["/dash/all-expenses"]);
             },
             err => {
                 this.snackbar.open(err.error.errorMsg, "Ok", {
@@ -69,10 +85,6 @@ export class AddExpenseComponent implements OnInit {
                 this.dialog.closeAll();
             }
         );
-    }
-
-    onCloseDialog() {
-        this.dialog.closeAll();
     }
 
 }

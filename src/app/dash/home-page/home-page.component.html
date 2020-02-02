@@ -94,7 +94,7 @@
 					<mat-list-item class="item" *ngFor="let item of expenses" (click)="onShowDetail(item._id)">
 						<mat-icon mat-list-icon color="primary">label_important</mat-icon>
 						<h3 mat-line class="listTitle">{{ item.name }}</h3>
-						<p mat-line>{{ item.date | date }}</p>
+						<p mat-line>{{ item.date }}</p>
 						<div align="end">
 							<p mat-line>{{ item.value | currency }}</p>
 						</div>

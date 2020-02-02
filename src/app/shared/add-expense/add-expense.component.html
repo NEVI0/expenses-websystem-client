@@ -32,11 +32,8 @@
 		<mat-grid-tile colspan="2">
 			<mat-form-field appearance="outline" class="group" hideRequiredMarker>
 				<mat-label>Data de Criação</mat-label>
-				<input matInput formControlName="date">
+				<input matInput formControlName="date" maxlength="10">
 				<mat-icon matSuffix>today</mat-icon>
-				<!-- <input matInput formControlName="date" [matDatepicker]="datePicker">
-				<mat-datepicker-toggle [for]="datePicker" matSuffix></mat-datepicker-toggle>
-				<mat-datepicker #datePicker></mat-datepicker> -->
 
                 <mat-error *ngIf="addForm.get('date').hasError('required')">
                     Você <strong>precisa</strong> informar a data
@@ -49,12 +46,10 @@
 
 		<mat-grid-tile colspan="2" rowspan="2">
 			<mat-form-field appearance="outline" class="group" hideRequiredMarker>
-				<mat-label>Pequena Descrição</mat-label>
-                <textarea matInput formControlName="description" rows="5"></textarea>
-
-                <mat-error *ngIf="addForm.get('description').hasError('maxlength')">
-                    A descrição não pode ter mais de <strong>250</strong> caracteres
-                </mat-error>
+				<mat-label>Pequena Descrição
+					{{ total == 0 ? '' : ': ' + total }}
+				</mat-label>
+				<textarea matInput formControlName="description" rows="5" maxlength="200"></textarea>
 			</mat-form-field>
 		</mat-grid-tile>
 	</mat-grid-list>

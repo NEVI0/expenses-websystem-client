@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { tap, catchError, map, distinctUntilChanged, debounceTime, switchMap } from 'rxjs/operators';
+import { tap, map, distinctUntilChanged, debounceTime, switchMap } from 'rxjs/operators';
 
 import { Expense } from '../../interfaces/Expense';
 import { DashService } from '../dash.service';
@@ -31,7 +31,6 @@ export class AllExpensesComponent implements OnInit {
 		private dashService: DashService,
 		private authService: AuthService,
 		private dialog: MatDialog,
-		private snackbar: MatSnackBar
 	) {}
 
 	ngOnInit() {
@@ -43,10 +42,7 @@ export class AllExpensesComponent implements OnInit {
 			debounceTime(250),
 			distinctUntilChanged(),
 			switchMap(result => this.dashService.search(this.authService.user._id, result)),
-			tap((result: any) => {
-				this.totalResults = result.length;
-				console.log(result);
-			})
+			tap(result => this.totalResults = result.length)
 		);
 	}
 
