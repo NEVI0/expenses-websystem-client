@@ -32,13 +32,18 @@
 		<mat-grid-tile colspan="2">
 			<mat-form-field appearance="outline" class="group" hideRequiredMarker>
 				<mat-label>Data de Criação</mat-label>
-				<input matInput formControlName="date" [matDatepicker]="datePicker">
+				<input matInput formControlName="date">
+				<mat-icon matSuffix>today</mat-icon>
+				<!-- <input matInput formControlName="date" [matDatepicker]="datePicker">
 				<mat-datepicker-toggle [for]="datePicker" matSuffix></mat-datepicker-toggle>
-				<mat-datepicker #datePicker></mat-datepicker>
+				<mat-datepicker #datePicker></mat-datepicker> -->
 
                 <mat-error *ngIf="addForm.get('date').hasError('required')">
                     Você <strong>precisa</strong> informar a data
-                </mat-error>
+				</mat-error>
+				<mat-error *ngIf="addForm.get('date').hasError('pattern')">
+					O formato da senha <strong>precisa</strong> ser em DD/MM/AAAA
+				</mat-error>
 			</mat-form-field>
 		</mat-grid-tile>
 

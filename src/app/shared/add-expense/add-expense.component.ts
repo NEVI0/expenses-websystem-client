@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
+import { map, tap, filter } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { DashService } from '../../dash/dash.service';
@@ -29,7 +30,11 @@ export class AddExpenseComponent implements OnInit {
         this.addForm = this.formBuilder.group({
             name: [ null, Validators.required ],
             value: [ null, Validators.required ],
-            date: [ null, Validators.required ],
+            date: [ null, [
+                Validators.required,
+                Validators.maxLength(10),
+                Validators.pattern('^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/[12][0-9]{3}$')
+            ] ],
             description: [ null, Validators.maxLength(200) ]
         });
     }
