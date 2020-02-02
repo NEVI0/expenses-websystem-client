@@ -32,7 +32,7 @@ To code, I've been using Node and MongoDB to do the Backend (API), and to do the
 * In the **main.ts** file:
 	`import 'hammerjs'`
 
-#Links
+# Links
 
 * [Angular](https://angular.io/docs "Angular Website")
 * [Angular CLI](https://cli.angular.io/ "Angular CLI Website")
