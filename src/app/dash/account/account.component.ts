@@ -9,6 +9,7 @@ import { User } from '../../interfaces/User';
 import { AuthService } from '../../auth/auth.service';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { UpdateAccountComponent } from '../../shared/update-account/update-account.component';
+import { UpdateImageComponent } from '../../shared/update-image/update-image.component';
 
 @Component({
     selector: 'app-account',
@@ -85,6 +86,12 @@ export class AccountComponent implements OnInit {
 				});
 			}
 		);
+	}
+
+	onChangeImage() {
+		this.dialog.open(UpdateImageComponent, {
+			width: "400px"
+		});
 	}
 
 }
