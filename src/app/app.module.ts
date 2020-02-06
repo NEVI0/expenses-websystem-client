@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
 
 /* Angular Material */
 import {
@@ -51,7 +52,8 @@ const MaterialModules = [
         HttpClientModule,
         RoutesModule,
         ReactiveFormsModule,
-        SharedModule
+        SharedModule,
+        ChartsModule
     ],
     declarations: [
         AppComponent,
