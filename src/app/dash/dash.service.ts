@@ -70,8 +70,10 @@ export class DashService {
 		}).pipe(take(1));
 	}
 
-	updateExpense(data, _id: string) {
-
+	updateExpense(_id: string, body) {
+		return this.http.put<Expense>(`${this.BlockedApiUrl}/expenses/${_id}`, body, {
+			headers: this.headers
+		}).pipe(take(1));
 	}
 
 	deleteExpense(_id: string) {
