@@ -28,20 +28,22 @@ export class AuthService {
         return this._user;
     }
 
-    login(json) {
-        return this.http.post<User>(`${this.OpenedApiUrl}/login`, json).pipe(
+    login(body) {
+        return this.http.post<User>(`${this.OpenedApiUrl}/login`, body).pipe(
             tap(resp => this._user = resp)
         );
     }
 
-    signup(json) {
-        return this.http.post<User>(`${this.OpenedApiUrl}/signup`, json).pipe(
+    signup(body) {
+        return this.http.post<User>(`${this.OpenedApiUrl}/signup`, body).pipe(
             tap(resp => this._user = resp)
         );
     }
 
 	validateToken(token: string) {
-		return this.http.post<any>(`${this.OpenedApiUrl}/validateToken/`, { token: token }).pipe(take(1));
+		return this.http.post<any>(`${this.OpenedApiUrl}/validateToken/`, {
+            token: token
+        }).pipe(take(1));
 	}
 
 
