@@ -7,4 +7,5 @@ export interface Expense {
 	createdAt: Date;
 	userId: string;
 	tags: Array<string>;
+	status: string;
 }
