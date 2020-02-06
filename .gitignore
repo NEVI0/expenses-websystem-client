@@ -46,4 +46,4 @@ testem.log
 Thumbs.db
 
 # Config Vars
-/src/environments/*.*
+src/environments/
