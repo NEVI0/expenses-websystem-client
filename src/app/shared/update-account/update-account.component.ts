@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar, MatDialog } from '@angular/material';
+import { MatSnackBar, MatDialogRef } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -21,11 +21,11 @@ export class UpdateAccountComponent implements OnInit {
     isLoading: boolean = false;
 
     constructor(
+        private dialogRef: MatDialogRef<any>,
         private formBuilder: FormBuilder,
         private authService: AuthService,
         private dashService: DashService,
         private snackbar: MatSnackBar,
-        private dialog: MatDialog,
         private router: Router
     ) {}
 
@@ -44,24 +44,26 @@ export class UpdateAccountComponent implements OnInit {
             resp => {
                 localStorage.removeItem(this.AppUserData);
                 localStorage.setItem(this.AppUserData, JSON.stringify(resp));
+
                 this.isLoading = false;
-                this.dialog.closeAll();
+                this.dialogRef.close(true);
                 this.authService._user = resp;
+
                 this.snackbar.open("Seus dados foram atualizados com sucesso!", "Ok", {
                     duration: 3500
                 });
                 this.router.navigate(['/dash/account']);
             },
             err => {
-                this.dialog.closeAll();
+                this.dialogRef.close(false);
                 this.isLoading = false;
 
-                if (err.error.errorMsg == null || err.error.errorMsg == undefined) {
+                if (err.error.message == null || err.error.message == undefined) {
                     this.snackbar.open("Ocorreu um Error! Tente novamente", "Ok", {
                         duration: 3500
                     });
                 } else {
-                    this.snackbar.open(err.error.errorMsg, "Ok", {
+                    this.snackbar.open(err.error.message, "Ok", {
                         duration: 3500
                     });
                 }

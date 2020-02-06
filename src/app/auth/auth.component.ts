@@ -52,12 +52,12 @@ export class AuthComponent implements OnInit {
             err => {
                 this.isLoading = false;
 
-                if (err.error.errorMsg == undefined || err.error.errorMsg == null || err.error.errorMsg == '') {
+                if (err.error.message == undefined || err.error.message == null || err.error.message == '') {
                     this.snackbar.open("Ocorreu um error no Servidor! Tente mais tarde", "Ok", {
                         duration: 3500
                     });
                 } else {
-                    this.snackbar.open(err.error.errorMsg, "Ok", {
+                    this.snackbar.open(err.error.message, "Ok", {
                         duration: 3500
                     });
                 }
@@ -78,12 +78,12 @@ export class AuthComponent implements OnInit {
             err => {
                 this.isLoading = false;
 
-                if (err.error.errorMsg == undefined || err.error.errorMsg == null || err.error.errorMsg == '') {
+                if (err.error.message == undefined || err.error.message == null || err.error.message == '') {
                     this.snackbar.open("Ocorreu um error no Servidor! Tente mais tarde", "Ok", {
                         duration: 3500
                     });
                 } else {
-                    this.snackbar.open(err.error.errorMsg, "Ok", {
+                    this.snackbar.open(err.error.message, "Ok", {
                         duration: 3500
                     });
                 }

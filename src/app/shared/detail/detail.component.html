@@ -29,7 +29,7 @@
 				<mat-icon mat-list-icon color="primary">bookmark</mat-icon>
 				<h3 mat-line>Status</h3>
 				<div align="end">
-					<p mat-line>PENDENTE</p>
+					<p mat-line>{{ expense.status }}</p>
 				</div>
 			</mat-list-item>
 		</mat-list>
@@ -37,8 +37,16 @@
 	</mat-dialog-content>
 
 	<mat-dialog-actions align="center">
-		<button mat-button color="accent">
-			Marcar como Paga
+		<button mat-icon-button matTooltip="Excluir" (click)="onDelete(expense._id)">
+			<mat-icon>delete</mat-icon>
+		</button>
+		<button mat-icon-button [matTooltip]="
+			expense.status == 'PENDENTE' ? 'Marcar como Pago' : 'Marcar como Pendente'
+		" (click)="onChangeStatus(expense._id, expense.status)">
+			<mat-icon>done_all</mat-icon>
+		</button>
+		<button mat-icon-button matTooltip="Editar Dados" (click)="onUpdate(expense._id)">
+			<mat-icon>edit</mat-icon>
 		</button>
 	</mat-dialog-actions>
 

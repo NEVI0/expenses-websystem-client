@@ -18,11 +18,11 @@
 }
 
 .item:hover {
-    background-color: #777;
+    background-color: #cecece;
 }
 
 .content {
-    margin-top: 20px;
+    margin-top: 35px;
 }
 
 mat-list .listTitle {
@@ -31,12 +31,16 @@ mat-list .listTitle {
 
 mat-row.example-element-row {
     transition: 0.5s ease all;
+    cursor: default;
 }
 
 mat-row.example-element-row:hover {
-    background: #777;
+    background: #cecece;
 }
 
-.col {
-    width: 20px;
+.leftBtn {
+    margin-right: 10px;
+}
+.rightBtn {
+    margin-left: 10px;
 }

@@ -17,7 +17,7 @@
 			<mat-expansion-panel>
 				<mat-expansion-panel-header>
 					<mat-panel-title>
-						Veja seu Lucro
+						Controle de Dados
 					</mat-panel-title>
 				</mat-expansion-panel-header>
 
@@ -33,6 +33,15 @@
 									'success': !isDanger
 								}"
 							>{{ calc | currency }}</p>
+						</div>
+					</mat-list-item>
+
+					<mat-list-item>
+						<mat-icon mat-list-icon color="primary">timeline</mat-icon>
+						<h3 mat-line class="listTitle">Média de Despesas</h3>
+						<p mat-line>Total de Despesas: {{ dataCtrl.numberOfExpenses }}</p>
+						<div align="end">
+							<p mat-line>{{ dataCtrl.avgOfValues | currency }}</p>
 						</div>
 					</mat-list-item>
 				</mat-list>
@@ -74,7 +83,9 @@
 	<!-- Verifica se existe alguma Despesa, senão carrega o ng-template -->
 	<div *ngIf="expenses == undefined || expenses == null || expenses.length == 0; else someExpenses" align="center">
 		<p>Você não possui nenhuma despesa cadastrada!</p>
-		<button mat-raised-button color="primary" (click)="openDialog()">Adicionar Despesa</button>
+		<button mat-raised-button color="accent" class="leftBtn" (click)="onRefresh()">Tentar Denovo</button>
+		ou
+		<button mat-raised-button color="accent" class="rightBtn" (click)="onAddExpense()">Adicionar Despesa</button>
 	</div>
 	<!-- FIM -->
 
@@ -129,3 +140,23 @@
 </ng-template>
 <!-- FIM -->
 
+<!-- Titulo -->
+<h2 class="title">
+	Gráfico com a média Mensal
+	<small>Controle de Dados</small>
+</h2>
+<!-- FIM -->
+
+<!-- Chart -->
+<div class="chart">
+	<canvas
+		baseChart
+		[datasets]="barChatData"
+		[labels]="barChartLabels"
+		[options]="barChartOptions"
+		[legend]="barChartLegend"
+		[chartType]="barChartType"
+		[colors]="barChartCorlors"
+	></canvas>
+</div>
+<!-- FIM -->

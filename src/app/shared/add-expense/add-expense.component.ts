@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
 
 import { DashService } from '../../dash/dash.service';
@@ -18,8 +18,8 @@ export class AddExpenseComponent implements OnInit {
     total: number = 0;
 
     constructor(
+        private dialogRef: MatDialogRef<any>,
         private formBuilder: FormBuilder,
-        private dialog: MatDialog,
         private dashService: DashService,
         private authService: AuthService,
         private snackbar: MatSnackBar,
@@ -72,7 +72,7 @@ export class AddExpenseComponent implements OnInit {
 
         this.dashService.insertExpense(JSON.parse(stringfy)).subscribe(
             resp => {
-                this.dialog.closeAll();
+                this.dialogRef.close(true);
                 this.snackbar.open("Despesa adicionada com sucesso!", "Ok", {
                     duration: 3500
                 });
@@ -82,7 +82,7 @@ export class AddExpenseComponent implements OnInit {
                 this.snackbar.open(err.error.errorMsg, "Ok", {
                     duration: 3500
                 });
-                this.dialog.closeAll();
+                this.dialogRef.close(false);
             }
         );
     }

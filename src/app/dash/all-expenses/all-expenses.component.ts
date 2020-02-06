@@ -8,6 +8,7 @@ import { Expense } from '../../interfaces/Expense';
 import { DashService } from '../dash.service';
 import { DetailComponent } from '../../shared/detail/detail.component';
 import { AuthService } from '../../auth/auth.service';
+import { AddExpenseComponent } from '../../shared/add-expense/add-expense.component';
 
 @Component({
     selector: 'app-all-expenses',
@@ -35,8 +36,10 @@ export class AllExpensesComponent implements OnInit {
 
 	ngOnInit() {
 		this.onRefresh();
-		this.displayedColumns = ['#', 'name', 'value', 'date', 'description'];
+	}
 
+	onRefresh() {
+		this.expenses$ = this.dashService.getExpenses();
 		this.results$ = this.tag.valueChanges.pipe(
 			map(result => result.trim()),
 			debounceTime(250),
@@ -44,16 +47,25 @@ export class AllExpensesComponent implements OnInit {
 			switchMap(result => this.dashService.search(this.authService.user._id, result)),
 			tap(result => this.totalResults = result.length)
 		);
-	}
-
-	onRefresh() {
-		this.expenses$ = this.dashService.getExpenses();
+		this.displayedColumns = ['#', 'name', 'value', 'status', 'date'];
 	}
 
 	onShowDetail(_id: string) {
-		this.dialog.open(DetailComponent, {
+		const dialogRef = this.dialog.open(DetailComponent, {
 			width: "400px",
 			data: { _id: _id }
+		});
+		dialogRef.afterClosed().subscribe(resp => {
+			if (resp == true) this.onRefresh();
+		})
+	}
+
+	onAddExpense() {
+		const dialogRef = this.dialog.open(AddExpenseComponent, {
+            width: "400px"
+        });
+        dialogRef.afterClosed().subscribe(resp => {
+			if (resp == true) this.onRefresh();
 		});
 	}
 

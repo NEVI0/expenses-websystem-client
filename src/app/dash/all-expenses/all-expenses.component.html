@@ -53,8 +53,10 @@
 
 	<!-- Verifica se existe alguma Despesa, senão carrega o ng-template -->
 	<div *ngIf="expenses.length == 0; else allExpenses" align="center">
-		<p>Não há nenhuma Despesa</p>
-		<button mat-raised-button color="primary" (click)="onRefresh()">Tentar Denovo</button>
+		<p>Você não possui nenhuma despesa cadastrada!</p>
+		<button mat-raised-button color="accent" class="leftBtn" (click)="onRefresh()">Tentar Denovo</button>
+		ou
+		<button mat-raised-button color="accent" class="rightBtn" (click)="onAddExpense()">Adicionar Despesa</button>
 	</div>
 	<!-- FIM -->
 
@@ -87,15 +89,16 @@
 						<mat-cell *matCellDef="let data"> {{ data.value | currency }} </mat-cell>
 					</ng-container>
 
+					<ng-container matColumnDef="status">
+						<mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+						<mat-cell *matCellDef="let data"> {{ data.status }} </mat-cell>
+					</ng-container>
+
 					<ng-container matColumnDef="date">
 						<mat-header-cell *matHeaderCellDef>Data de Criação</mat-header-cell>
 						<mat-cell *matCellDef="let data"> {{ data.date }} </mat-cell>
 					</ng-container>
 
-					<ng-container matColumnDef="description">
-						<mat-header-cell *matHeaderCellDef>Descrição</mat-header-cell>
-						<mat-cell *matCellDef="let data"> {{ data.description }} </mat-cell>
-					</ng-container>
 
 					<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
 					<mat-row
@@ -105,8 +108,6 @@
 					></mat-row>
 
 				</mat-table>
-
-
 
 			</mat-expansion-panel>
 		</mat-accordion>
@@ -120,7 +121,7 @@
 
 <!-- Spinner -->
 <ng-template #loading>
-	<mat-grid-list cols="3" rowHeight="50">
+	<mat-grid-list cols="3" rowHeight="50" class="content">
 		<mat-grid-tile colspan="1"></mat-grid-tile>
 		<mat-grid-tile colspan="1" align="center">
 			<mat-progress-bar mode="indeterminate"></mat-progress-bar>

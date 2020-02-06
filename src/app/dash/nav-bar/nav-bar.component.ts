@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { User } from '../../interfaces/User';
+import { AuthService } from '../../auth/auth.service';
+import { environment } from '../../../environments/environment';
+
 @Component({
     selector: 'app-nav-bar',
     templateUrl: './nav-bar.component.html',
@@ -9,9 +13,15 @@ import { Router } from '@angular/router';
 
 export class NavBarComponent implements OnInit {
 
-    isOpened: boolean = false;
+    private readonly AppUserData = environment.AppUserData;
 
-    constructor(private router: Router) {}
+    isOpened: boolean = false;
+    userData: User = this.authService.user;
+
+    constructor(
+        private router: Router,
+        private authService: AuthService,
+    ) {}
 
     ngOnInit() {}
 

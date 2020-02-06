@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject, empty } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { MatDialog, MatSnackBar } from '@angular/material';
 
 import { DataController } from '../../interfaces/DataController';
@@ -9,7 +9,6 @@ import { User } from '../../interfaces/User';
 import { AuthService } from '../../auth/auth.service';
 import { ModalComponent } from '../../shared/modal/modal.component';
 import { UpdateAccountComponent } from '../../shared/update-account/update-account.component';
-import { UpdateImageComponent } from '../../shared/update-image/update-image.component';
 
 @Component({
     selector: 'app-account',
@@ -20,7 +19,6 @@ import { UpdateImageComponent } from '../../shared/update-image/update-image.com
 export class AccountComponent implements OnInit {
 
     dataCtrl$: Observable<DataController>;
-	error$ = new Subject<boolean>();
 
 	userData: User;
 	isLoading: boolean = false;
@@ -29,7 +27,7 @@ export class AccountComponent implements OnInit {
 		private dashService: DashService,
 		private authService: AuthService,
 		private dialog: MatDialog,
-		private snackbar: MatSnackBar
+		private snackbar: MatSnackBar,
 	) {}
 
 	ngOnInit() {
@@ -40,13 +38,7 @@ export class AccountComponent implements OnInit {
 		this.isLoading = true;
 		this.userData = this.authService.user;
 		this.dataCtrl$ = this.dashService.getUserController().pipe(
-			tap(resp => {
-				this.isLoading = false;
-			}),
-			catchError(err => {
-				this.error$.next(err);
-				return empty();
-			})
+			tap(resp => this.isLoading = false)
 		);
 	}
 
@@ -67,9 +59,7 @@ export class AccountComponent implements OnInit {
 			width: "400px"
 		});
 		dialogRef.afterClosed().subscribe(resp => {
-			if (resp == undefined) {
-				this.onRefresh();
-			}
+			if (resp == true) this.onRefresh();
 		});
 	}
 
@@ -86,12 +76,6 @@ export class AccountComponent implements OnInit {
 				});
 			}
 		);
-	}
-
-	onChangeImage() {
-		this.dialog.open(UpdateImageComponent, {
-			width: "400px"
-		});
 	}
 
 }
