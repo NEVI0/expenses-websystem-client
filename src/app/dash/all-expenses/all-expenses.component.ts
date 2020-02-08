@@ -26,7 +26,6 @@ export class AllExpensesComponent implements OnInit {
 	displayedColumns: string[];
 	isLoading: boolean = false;
 	totalResults: number;
-	index: number = 1;
 
 	constructor(
 		private dashService: DashService,
@@ -47,7 +46,7 @@ export class AllExpensesComponent implements OnInit {
 			switchMap(result => this.dashService.search(this.authService.user._id, result)),
 			tap(result => this.totalResults = result.length)
 		);
-		this.displayedColumns = ['#', 'name', 'value', 'status', 'date'];
+		this.displayedColumns = ['name', 'value', 'status', 'date'];
 	}
 
 	onShowDetail(_id: string) {

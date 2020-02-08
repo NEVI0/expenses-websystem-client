@@ -14,11 +14,11 @@
     cursor: pointer;
     transition: 0.5s ease all;
     border-radius: 3px;
-    margin-bottom: 2px;
+    margin: 2px 0;
 }
 
 .item:hover {
-    background-color: #cecece;
+    background-color: #afafaf;
 }
 
 .content {
@@ -35,7 +35,7 @@ mat-row.example-element-row {
 }
 
 mat-row.example-element-row:hover {
-    background: #cecece;
+    background: #afafaf;
 }
 
 .leftBtn {

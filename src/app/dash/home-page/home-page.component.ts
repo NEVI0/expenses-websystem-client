@@ -18,33 +18,22 @@ import { AddExpenseComponent } from '../../shared/add-expense/add-expense.compon
 
 export class HomePageComponent implements OnInit {
 
-	public barChatData = [
-		{ data: [12, 54, 11, 54, 76, 34, 43, 29, 12, 23, 69, 0], label: 'Média por Mês' },
+	public barChatData: Array<Object> = [
+		{ data: [12, 54, 11, 54, 76, 34, 43, 29, 12, 23, 69, 8], label: 'Média por Mês' },
 	];
-	public barChartLabels = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-	public barChartOptions = {
-		scaleShowVerticalLines: false,
-		responsive: true
-	};
-	public barChartLegend = true;
-	public barChartType = 'line';
-	public barChartCorlors = [{
-		backgroundColor: 'rgba(98, 0, 234, 0.2)',
-		borderColor: 'rgba(98, 0, 234, 0.7)',
-		pointBackgroundColor: 'rgba(98, 0, 234, 0.2)',
-		pointBorderColor: '#fff',
-		pointHoverBackgroundColor: '#fff',
-		pointHoverBorderColor: 'rgba(98, 0, 234, 0.7)'
-	}];
+	public barChartLabels: Array<string>;
+	public barChartOptions: Object;
+	public barChartLegend: boolean;
+	public barChartType: string;
+	public barChartCorlors: Array<Object>;
 
-    expenses$: Observable<Expense[]>;
-	dataCtrl$: Observable<DataController>;
+    public expenses$: Observable<Expense[]>;
+	public dataCtrl$: Observable<DataController>;
 
-	userSalary: number = this.authService.user.salary;
-	numberOfExpenses: number;
-	panelOpenState: boolean = false;
-	isDanger: boolean = false;
-	calc: number;
+	public userSalary = this.authService.user.salary;
+	public numberOfExpenses: number;
+	public isDanger: boolean = false;
+	public calc: number;
 
   	constructor(
 		private dashService: DashService,
@@ -57,6 +46,27 @@ export class HomePageComponent implements OnInit {
 	}
 
 	onRefresh() {
+		this.barChartLegend = true;
+		this.barChartType = 'line';
+		this.barChartLabels = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+		this.barChartOptions  = {
+			scaleShowVerticalLines: false,
+			responsive: true,
+			bezierCurve: false,
+			elements: {
+				line: {	tension: 0 }
+			}
+		};
+		this.barChartCorlors = [{
+			backgroundColor: 'rgba(98, 0, 234, 0)',
+			borderColor: 'rgba(98, 0, 234, 0.7)',
+			pointBackgroundColor: 'rgba(98, 0, 234, 0.2)',
+			pointBorderColor: '#fff',
+			pointHoverBackgroundColor: '#fff',
+			pointHoverBorderColor: 'rgba(98, 0, 234, 0.7)'
+		}];
+
+
 		this.expenses$ = this.dashService.getLastTenExpenses().pipe(
 			tap(resp => this.numberOfExpenses = resp.length)
 		);

@@ -19,3 +19,12 @@ mat-sidenav {
 .container {
 	margin: 25px;
 }
+
+@media only screen and (max-width: 427px) {
+	#btnOne, #btnTwo { 
+		transition: 0.5s; 
+		opacity: 0;
+		position: fixed;
+		left: 30000px;
+	}
+}

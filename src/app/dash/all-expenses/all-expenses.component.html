@@ -18,34 +18,35 @@
 			<mat-icon matSuffix>search</mat-icon>
 		</mat-form-field>
 
+		<!-- Resultado da Pesquisa -->
+		<div *ngIf="results$ | async as results">
+			<mat-divider></mat-divider>
+			<mat-list class="list">
+
+				<div *ngIf="results == null || results.length == 0; else itemList" align="center">
+					<p style="margin-top: 5px">Nada Encontrado!</p>
+				</div>
+
+				<!-- Lista de Resultados -->
+				<ng-template #itemList>
+					<mat-list-item class="item" *ngFor="let item of results" (click)="onShowDetail(item._id)">
+						<mat-icon mat-list-icon color="primary">label_important</mat-icon>
+						<h3 mat-line class="listTitle">{{ item.name }}</h3>
+						<p mat-line>{{ item.date }}</p>
+						<div align="end">
+							<p mat-line>{{ item.value | currency }}</p>
+						</div>
+					</mat-list-item>
+				</ng-template>
+				<!-- FIM -->
+			</mat-list>
+		</div>
+		<!-- FIM -->
+
 	</mat-card-content>
 	<!-- FIM -->
 
 </mat-card>
-<!-- FIM -->
-
-<!-- Resultado da Pesquisa -->
-<div *ngIf="results$ | async as results">
-	<mat-list class="list">
-
-		<div *ngIf="results == null || results.length == 0; else itemList" align="center">
-			<p>Nada Encontrado!</p>
-		</div>
-
-		<!-- Lista de Resultados -->
-		<ng-template #itemList>
-			<mat-list-item class="item" *ngFor="let item of results" (click)="onShowDetail(item._id)">
-				<mat-icon mat-list-icon color="primary">label_important</mat-icon>
-				<h3 mat-line class="listTitle">{{ item.name }}</h3>
-				<p mat-line>{{ item.date }}</p>
-				<div align="end">
-					<p mat-line>{{ item.value | currency }}</p>
-				</div>
-			</mat-list-item>
-		</ng-template>
-		<!-- FIM -->
-	</mat-list>
-</div>
 <!-- FIM -->
 
 <!-- Div que verifica se há despesas na variavel -->
@@ -73,11 +74,6 @@
 				</mat-expansion-panel-header>
 
 				<mat-table [dataSource]="expenses$" class="table mat-elevation-z8">
-
-					<ng-container matColumnDef="#">
-						<mat-header-cell *matHeaderCellDef row>#</mat-header-cell>
-						<mat-cell *matCellDef="let data"> {{ index }} </mat-cell>
-					</ng-container>
 
 					<ng-container matColumnDef="name">
 						<mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
