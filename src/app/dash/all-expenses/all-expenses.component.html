@@ -24,7 +24,7 @@
 			<mat-list class="list">
 
 				<div *ngIf="results == null || results.length == 0; else itemList" align="center">
-					<p style="margin-top: 5px">Nada Encontrado!</p>
+					<p style="top: 15px">Nada Encontrado!</p>
 				</div>
 
 				<!-- Lista de Resultados -->
@@ -32,7 +32,7 @@
 					<mat-list-item class="item" *ngFor="let item of results" (click)="onShowDetail(item._id)">
 						<mat-icon mat-list-icon color="primary">label_important</mat-icon>
 						<h3 mat-line class="listTitle">{{ item.name }}</h3>
-						<p mat-line>{{ item.date }}</p>
+						<p mat-line>{{ item.date }} &#9679; {{ item.status }}</p>
 						<div align="end">
 							<p mat-line>{{ item.value | currency }}</p>
 						</div>
@@ -64,50 +64,37 @@
 	<!-- Tabela com as Despesas -->
 	<ng-template #allExpenses>
 
-		<!-- Painel que Expande contendo a lista -->
-		<mat-accordion>
-			<mat-expansion-panel>
-				<mat-expansion-panel-header>
-					<mat-panel-title>
-						Tabela com todas as suas despesas
-					</mat-panel-title>
-				</mat-expansion-panel-header>
+		<mat-table [dataSource]="expenses$" class="table mat-elevation-z8">
 
-				<mat-table [dataSource]="expenses$" class="table mat-elevation-z8">
+			<ng-container matColumnDef="name">
+				<mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+				<mat-cell *matCellDef="let data"> {{ data.name }} </mat-cell>
+			</ng-container>
 
-					<ng-container matColumnDef="name">
-						<mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
-						<mat-cell *matCellDef="let data"> {{ data.name }} </mat-cell>
-					</ng-container>
+			<ng-container matColumnDef="value">
+				<mat-header-cell *matHeaderCellDef>Valor</mat-header-cell>
+				<mat-cell *matCellDef="let data"> {{ data.value | currency }} </mat-cell>
+			</ng-container>
 
-					<ng-container matColumnDef="value">
-						<mat-header-cell *matHeaderCellDef>Valor</mat-header-cell>
-						<mat-cell *matCellDef="let data"> {{ data.value | currency }} </mat-cell>
-					</ng-container>
+			<ng-container matColumnDef="status">
+				<mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+				<mat-cell *matCellDef="let data"> {{ data.status }} </mat-cell>
+			</ng-container>
 
-					<ng-container matColumnDef="status">
-						<mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
-						<mat-cell *matCellDef="let data"> {{ data.status }} </mat-cell>
-					</ng-container>
-
-					<ng-container matColumnDef="date">
-						<mat-header-cell *matHeaderCellDef>Data de Criação</mat-header-cell>
-						<mat-cell *matCellDef="let data"> {{ data.date }} </mat-cell>
-					</ng-container>
+			<ng-container matColumnDef="date">
+				<mat-header-cell *matHeaderCellDef>Data de Criação</mat-header-cell>
+				<mat-cell *matCellDef="let data"> {{ data.date }} </mat-cell>
+			</ng-container>
 
 
-					<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-					<mat-row
-						*matRowDef=" let row; columns: displayedColumns"
-						(click)="onShowDetail(row._id)"
-						class="example-element-row"
-					></mat-row>
+			<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+			<mat-row
+				*matRowDef=" let row; columns: displayedColumns"
+				(click)="onShowDetail(row._id)"
+				class="example-element-row"
+			></mat-row>
 
-				</mat-table>
-
-			</mat-expansion-panel>
-		</mat-accordion>
-		<!-- FIM -->
+		</mat-table>
 
 	</ng-template>
 	<!-- FIM -->

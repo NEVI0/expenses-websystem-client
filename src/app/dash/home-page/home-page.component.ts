@@ -9,6 +9,12 @@ import { DashService } from '../dash.service';
 import { DetailComponent } from '../../shared/detail/detail.component';
 import { AuthService } from '../../auth/auth.service';
 import { AddExpenseComponent } from '../../shared/add-expense/add-expense.component';
+import { ChartController } from '../../interfaces/ChatController';
+
+export interface ChartData {
+	data: Array<number>;
+	label: string;
+}
 
 @Component({
 	selector: 'app-home-page',
@@ -18,8 +24,15 @@ import { AddExpenseComponent } from '../../shared/add-expense/add-expense.compon
 
 export class HomePageComponent implements OnInit {
 
-	public barChatData: Array<Object> = [
-		{ data: [12, 54, 11, 54, 76, 34, 43, 29, 12, 23, 69, 8], label: 'Média por Mês' },
+	public barChartData: Array<ChartData> = [
+		{
+			data: [null, null, null, null, null, null, null, null, null, null, null, null],
+			label: 'Média por Mês'
+		},
+		{
+			data: [null, null, null, null, null, null, null, null, null, null, null, null],
+			label: 'Total de Despesas'
+		},
 	];
 	public barChartLabels: Array<string>;
 	public barChartOptions: Object;
@@ -29,6 +42,7 @@ export class HomePageComponent implements OnInit {
 
     public expenses$: Observable<Expense[]>;
 	public dataCtrl$: Observable<DataController>;
+	public chartCtrl$: Observable<ChartController[]>;
 
 	public userSalary = this.authService.user.salary;
 	public numberOfExpenses: number;
@@ -57,16 +71,33 @@ export class HomePageComponent implements OnInit {
 				line: {	tension: 0 }
 			}
 		};
-		this.barChartCorlors = [{
-			backgroundColor: 'rgba(98, 0, 234, 0)',
-			borderColor: 'rgba(98, 0, 234, 0.7)',
-			pointBackgroundColor: 'rgba(98, 0, 234, 0.2)',
-			pointBorderColor: '#fff',
-			pointHoverBackgroundColor: '#fff',
-			pointHoverBorderColor: 'rgba(98, 0, 234, 0.7)'
-		}];
+		this.barChartCorlors = [
+			{
+				backgroundColor: 'rgba(98, 0, 234, 0)',
+				borderColor: 'rgba(98, 0, 234, 0.7)',
+				pointBackgroundColor: 'rgba(98, 0, 234, 1)',
+				pointBorderColor: '#fff',
+				pointHoverBackgroundColor: '#fff',
+				pointHoverBorderColor: 'rgba(98, 0, 234, 0.7)'
+			},
+			{
+				backgroundColor: 'rgba(0, 161, 255, 0)',
+				borderColor: 'rgba(0, 161, 255, 0.7)',
+				pointBackgroundColor: 'rgba(0, 161, 255, 1)',
+				pointBorderColor: '#fff',
+				pointHoverBackgroundColor: '#fff',
+				pointHoverBorderColor: 'rgba(0, 161, 255, 0.7)'
+			}
+		];
 
-
+		this.chartCtrl$ = this.dashService.getChartData().pipe(
+			tap(resp => {
+				resp.forEach(item => {
+					this.barChartData[0].data[(item._id - 1)] = item.avg;
+					this.barChartData[1].data[(item._id - 1)] = item.total;
+				});
+			})
+		);
 		this.expenses$ = this.dashService.getLastTenExpenses().pipe(
 			tap(resp => this.numberOfExpenses = resp.length)
 		);

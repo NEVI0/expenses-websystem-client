@@ -105,7 +105,7 @@
 					<mat-list-item class="item" *ngFor="let item of expenses" (click)="onShowDetail(item._id)">
 						<mat-icon mat-list-icon color="primary">label_important</mat-icon>
 						<h3 mat-line class="listTitle">{{ item.name }}</h3>
-						<p mat-line>{{ item.date }}</p>
+						<p mat-line>{{ item.date }} &#9679; {{ item.status }}</p>
 						<div align="end">
 							<p mat-line>{{ item.value | currency }}</p>
 						</div>
@@ -142,21 +142,43 @@
 
 <!-- Titulo -->
 <h2 class="title">
-	Gráfico com o número de despesas por Mês
+	Gráfico para Controle
 	<small>Controle de Dados</small>
 </h2>
 <!-- FIM -->
 
-<!-- Chart -->
-<div class="chart">
-	<canvas
-		baseChart
-		[datasets]="barChatData"
-		[labels]="barChartLabels"
-		[options]="barChartOptions"
-		[legend]="barChartLegend"
-		[chartType]="barChartType"
-		[colors]="barChartCorlors"
-	></canvas>
+<div *ngIf="chartCtrl$ | async as chartData; else terdiaryLoading">
+
+	<div *ngIf="chartData == '' || chartData == [] || chartData == undefined; else chart" align="center">
+		Você precisa adicionar despesas para que o gráfico apareça!
+	</div>
+
+	<!-- Chart -->
+	<ng-template #chart>
+		<div class="chart">
+			<canvas
+				baseChart
+				[datasets]="barChartData"
+				[labels]="barChartLabels"
+				[options]="barChartOptions"
+				[legend]="barChartLegend"
+				[chartType]="barChartType"
+				[colors]="barChartCorlors"
+			></canvas>
+		</div>
+	</ng-template>
+	<!-- FIM -->
+
 </div>
+
+<!-- Terceiro Spinner de Carregando -->
+<ng-template #terdiaryLoading>
+	<mat-grid-list cols="3" rowHeight="50">
+		<mat-grid-tile colspan="1"></mat-grid-tile>
+		<mat-grid-tile colspan="1" align="center">
+			<mat-progress-bar mode="indeterminate"></mat-progress-bar>
+		</mat-grid-tile>
+		<mat-grid-tile colspan="1"></mat-grid-tile>
+	</mat-grid-list>
+</ng-template>
 <!-- FIM -->

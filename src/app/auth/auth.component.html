@@ -33,18 +33,21 @@
                             </mat-error>
                         </mat-form-field>
 
-                        <mat-checkbox>Lembre de Mim!</mat-checkbox>
-
                         <button type="submit" color="primary" class="login-button" mat-raised-button
-                            [disabled]="!loginForm.valid"
+                            [disabled]="!loginForm.valid || isLoading"
                         >
                             {{ isLoading ? 'Carregando...' : 'Login' }}
                         </button>
-                        <button mat-raised-button disabled class="login-button">
-                            Esqueci minha Senha
-                        </button>
 
                     </form>
+
+                    <button mat-raised-button class="login-button"
+                        [disabled]="!loginForm.get('email').valid"
+                        (click)="onForgotPass()"
+                    >
+                        Esqueci minha Senha
+                    </button>
+
                 </mat-card-content>
             </mat-tab>
 
@@ -100,7 +103,7 @@
                         </mat-form-field>
 
                         <button mat-raised-button color="primary" class="login-button"
-                            [disabled]="!signupForm.valid"
+                            [disabled]="!signupForm.valid || isLoading"
                         >
                             {{ isLoading ? 'Carregando...' : 'Cadastrar' }}
                         </button>

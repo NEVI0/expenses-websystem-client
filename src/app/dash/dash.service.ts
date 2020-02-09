@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { Expense } from '../interfaces/Expense';
 import { DataController } from '../interfaces/DataController';
 import { AuthService } from '../auth/auth.service';
+import { ChartController } from '../interfaces/ChatController';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,8 @@ import { AuthService } from '../auth/auth.service';
 
 export class DashService {
 
-    private readonly BlockedApiUrl = environment.BlockedApiUrl;
+	private readonly BlockedApiUrl = environment.BlockedApiUrl;
+	private readonly OpenApiUrl = environment.OpenApiUrl;
 	private readonly UserId = this.authService.user._id;
 
 	constructor(
@@ -56,6 +58,14 @@ export class DashService {
 		);
 	}
 
+	getChartData() {
+		return this.http.get<ChartController[]>(`${this.BlockedApiUrl}/chartController/${this.UserId}`, {
+			headers: this.headers
+		}).pipe(
+			tap(resp => resp)
+		);
+	}
+
 	search(_id: string, tag: string) {
 		return this.http.get<Expense[]>(`${this.BlockedApiUrl}/search/${_id}?tag=${tag}`, {
 			headers: this.headers
@@ -85,9 +95,7 @@ export class DashService {
 
 	/* Requisições para Usuário */
 	forgotPass(email: string) {
-		return this.http.post<any>(`${this.BlockedApiUrl}/forgotPass`, { email }, {
-			headers: this.headers
-		}).pipe(take(1));
+		return this.http.post<any>(`${this.OpenApiUrl}/forgotPass`, { email }).pipe(take(1));
 	}
 
 	resetPass(body) {

@@ -25,6 +25,7 @@ import { AddExpenseComponent } from './add-expense/add-expense.component';
 import { DetailComponent } from './detail/detail.component';
 import { ModalComponent } from './modal/modal.component';
 import { UpdateAccountComponent } from './update-account/update-account.component';
+import { UpdateExpenseComponent } from './update-expense/update-expense.component';
 
 @NgModule({
     imports: [
@@ -55,6 +56,7 @@ import { UpdateAccountComponent } from './update-account/update-account.componen
         DetailComponent,
         ModalComponent,
         UpdateAccountComponent,
+        UpdateExpenseComponent,
     ]
 })
 

@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { MAT_DIALOG_DATA, MatSnackBar, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatSnackBar, MatDialogRef, MatDialog } from '@angular/material';
 
 import { DashService } from '../../dash/dash.service';
 import { Expense } from '../../interfaces/Expense';
+import { AddExpenseComponent } from '../add-expense/add-expense.component';
 
 @Component({
     selector: 'app-detail',
@@ -20,6 +21,7 @@ export class DetailComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) public data: any,
         private dashService: DashService,
         private snackbar: MatSnackBar,
+        private dialog: MatDialog
     ) {}
 
     ngOnInit() {
@@ -74,7 +76,10 @@ export class DetailComponent implements OnInit {
     }
 
     onUpdate(_id: string) {
-
+        this.dialog.closeAll();
+        this.dialog.open(AddExpenseComponent, {
+            data: { _id }
+        });
     }
 
 }

@@ -55,7 +55,7 @@ export class AllExpensesComponent implements OnInit {
 			data: { _id: _id }
 		});
 		dialogRef.afterClosed().subscribe(resp => {
-			if (resp == true) this.onRefresh();
+			if (resp == true || resp == undefined) this.onRefresh();
 		})
 	}
 

@@ -46,5 +46,8 @@ export class AuthService {
         }).pipe(take(1));
 	}
 
+    forgotPass(email: string) {
+		return this.http.post<any>(`${this.OpenedApiUrl}/forgotPass`, { email }).pipe(take(1));
+	}
 
 }

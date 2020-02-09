@@ -46,7 +46,7 @@
 
 <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Cancelar</button>
-	<button mat-raised-button color="primary" type="submit" [disabled]="!updateForm.valid">
+	<button mat-raised-button color="primary" type="submit" [disabled]="!updateForm.valid || isLoading">
 		{{ isLoading ? 'Carregando...' : 'Atualizar' }}
 	</button>
 </mat-dialog-actions>

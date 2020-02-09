@@ -91,4 +91,20 @@ export class AuthComponent implements OnInit {
         );
     }
 
+    onForgotPass() {
+        this.authService.forgotPass(this.loginForm.value.email).subscribe(
+            resp => {
+                this.snackbar.open(resp.message, "Ok", {
+                    duration: 3500
+                });
+            },
+            err => {
+                console.log(err);
+                this.snackbar.open(err.error.message, "Ok", {
+                    duration: 3500
+                });
+            }
+        )
+    }
+
 }
