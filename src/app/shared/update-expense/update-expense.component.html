@@ -1,1 +1,67 @@
-<p>update-expense works!</p>
+<h2 mat-dialog-title>Editar Despesa</h2>
+
+<form [formGroup]="updateForm"  (ngSubmit)="onUpdateExpense()">
+<mat-dialog-content class="mat-typography">
+
+	<mat-grid-list cols="2" rowHeight="78">
+
+		<mat-grid-tile colspan="2">
+			<mat-form-field appearance="outline" class="group" hideRequiredMarker>
+				<mat-label>Nome da Despesa</mat-label>
+				<input type="text" formControlName="name" matInput>
+                <mat-icon matSuffix>edit</mat-icon>
+
+                <mat-error *ngIf="updateForm.get('name').hasError('required')">
+                    O nome é <strong>obrigatório</strong>
+                </mat-error>
+			</mat-form-field>
+		</mat-grid-tile>
+
+		<mat-grid-tile colspan="2">
+			<mat-form-field appearance="outline" class="group" hideRequiredMarker>
+				<mat-label>Valor da Despesa</mat-label>
+				<input type="number" formControlName="value" matInput>
+                <mat-icon matSuffix>attach_money</mat-icon>
+
+                <mat-error *ngIf="updateForm.get('value').hasError('required')">
+                    Você <strong>precisa</strong> informar o valor
+                </mat-error>
+			</mat-form-field>
+		</mat-grid-tile>
+
+		<mat-grid-tile colspan="2">
+			<mat-form-field appearance="outline" class="group" hideRequiredMarker>
+				<mat-label>Data de Criação</mat-label>
+				<input matInput formControlName="date" maxlength="10">
+				<mat-icon matSuffix>today</mat-icon>
+
+                <mat-error *ngIf="updateForm.get('date').hasError('required')">
+                    Você <strong>precisa</strong> informar a data
+				</mat-error>
+				<mat-error *ngIf="updateForm.get('date').hasError('pattern')">
+					O formato da senha <strong>precisa</strong> ser em DD/MM/AAAA
+				</mat-error>
+			</mat-form-field>
+		</mat-grid-tile>
+
+		<mat-grid-tile colspan="2" rowspan="2">
+			<mat-form-field appearance="outline" class="group" hideRequiredMarker>
+				<mat-label>Pequena Descrição
+					{{ total == 0 ? '' : ': ' + total }}
+				</mat-label>
+				<textarea matInput formControlName="description" rows="5" maxlength="200"></textarea>
+			</mat-form-field>
+		</mat-grid-tile>
+	</mat-grid-list>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close mat-dialog-close="true">Cancelar</button>
+
+    <button mat-raised-button color="primary"
+        type="submit" [disabled]="!updateForm.valid || isLoading"
+    >
+        {{ isLoading == true ? 'Carregando...' : 'Editar' }}
+    </button>
+</mat-dialog-actions>
+</form>

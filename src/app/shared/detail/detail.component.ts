@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatSnackBar, MatDialogRef, MatDialog } from '@angular/
 
 import { DashService } from '../../dash/dash.service';
 import { Expense } from '../../interfaces/Expense';
-import { AddExpenseComponent } from '../add-expense/add-expense.component';
+import { UpdateExpenseComponent } from '../update-expense/update-expense.component';
 
 @Component({
     selector: 'app-detail',
@@ -64,7 +64,7 @@ export class DetailComponent implements OnInit {
                 this.snackbar.open(`O status foi mudado para: ${resp.status}`, "Ok", {
                     duration: 3500
                 });
-                this.onRefresh();
+                this.dialogRef.close(true);
             },
             err => {
                 console.log(err);
@@ -75,10 +75,13 @@ export class DetailComponent implements OnInit {
         )
     }
 
-    onUpdate(_id: string) {
-        this.dialog.closeAll();
-        this.dialog.open(AddExpenseComponent, {
-            data: { _id }
+    onUpdate(expense) {
+        const dialogRef = this.dialog.open(UpdateExpenseComponent, {
+            data: { expense },
+            width: "400px"
+        });
+        dialogRef.afterClosed().subscribe(resp => {
+            if (resp == true) this.dialogRef.close(true);
         });
     }
 

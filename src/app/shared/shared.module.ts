@@ -49,7 +49,8 @@ import { UpdateExpenseComponent } from './update-expense/update-expense.componen
         AddExpenseComponent,
         DetailComponent,
         ModalComponent,
-        UpdateAccountComponent
+        UpdateAccountComponent,
+        UpdateExpenseComponent
     ],
     declarations: [
         AddExpenseComponent,
