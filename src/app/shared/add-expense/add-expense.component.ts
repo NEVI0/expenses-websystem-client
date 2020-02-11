@@ -36,8 +36,8 @@ export class AddExpenseComponent implements OnInit {
         var d = null;
         var m = null;
 
-        if (date.d >= 1 && date.d <= 9) d = "0" + date.d;
-        if (date.m >= 1 && date.m <= 9) m = "0" + (date.m + 1);
+        if (date.d >= 1 && date.d <= 9) d = "0" + date.d; else d = date.d;
+        if (date.m >= 1 && date.m <= 9) m = "0" + (date.m + 1); else m = date.m;
 
         this.addForm = this.formBuilder.group({
             name: [ null, Validators.required ],

@@ -55,9 +55,11 @@
 	<!-- Verifica se existe alguma Despesa, senão carrega o ng-template -->
 	<div *ngIf="expenses.length == 0; else allExpenses" align="center">
 		<p>Você não possui nenhuma despesa cadastrada!</p>
-		<button mat-raised-button color="accent" class="leftBtn" (click)="onRefresh()">Tentar Denovo</button>
-		ou
-		<button mat-raised-button color="accent" class="rightBtn" (click)="onAddExpense()">Adicionar Despesa</button>
+		<div class="btns">
+			<button mat-raised-button color="accent" class="leftBtn" (click)="onRefresh()">Tentar Denovo</button>
+			ou
+			<button mat-raised-button color="accent" class="rightBtn" (click)="onAddExpense()">Adicionar Despesa</button>
+		</div>
 	</div>
 	<!-- FIM -->
 

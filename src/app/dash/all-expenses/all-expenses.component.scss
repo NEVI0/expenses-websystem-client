@@ -44,3 +44,11 @@ mat-row.example-element-row:hover {
 .rightBtn {
     margin-left: 10px;
 }
+
+@media only screen and (max-width: 465px) {
+	.btns {
+        position: fixed;
+        opacity: 0;
+        left: 35000px;
+    }
+}
