@@ -21,7 +21,7 @@ mat-sidenav-container {
 }
 
 mat-card {
-    width: 40%;
+    width: 410px;
     margin: 10% auto;
     border-radius: 8px;
 }
@@ -41,4 +41,8 @@ mat-card-content {
     display: block;
     width: 80%;
     margin: 20px auto;
+}
+
+@media only screen and (max-width: 465px) {
+	mat-card { width: 255px; }
 }
