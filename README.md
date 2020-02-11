@@ -17,9 +17,8 @@ To code, I've been using Node and MongoDB to do the Backend (API), and to do the
 * Create the searchbox :ballot_box_with_check:
 * Make the searchbox works out :ballot_box_with_check:
 * Make the User CRUD :ballot_box_with_check:
-* Make a form to change the user image :x:
-* Make the AVG of expenses by month :x:
-* Improve the application style :x:
+* Make the AVG of expenses by month :ballot_box_with_check:
+* Improve the application style :ballot_box_with_check:
 
 # Configurations
 
@@ -42,4 +41,5 @@ To code, I've been using Node and MongoDB to do the Backend (API), and to do the
 
 # Important
 
+See the finel Result: [Minhas Despesas](https://expenses-web-system.firebaseapp.com "Project Endded")
 Angular's Awesome!!! hushushushus
